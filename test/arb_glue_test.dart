@@ -60,8 +60,15 @@ allTypePlaceholders: test {k1} {k2} {k3} {k4} {k5} {k6}
     k4: {type: Number}
     k5: {type: DateTime}
     k6: {type: NotExist}''');
-    File(join(zhPath, 'basic.arb')).writeAsStringSync('''{
-  "plain": "文字"
+    File(join(zhPath, 'feature.arb'))
+        .writeAsStringSync('''{"@@context": "feature",
+"withPlaceholders":{
+  "text": "YAML 客製化 {placeholder1} {placeholder2}",
+  "description": "特殊說明",
+  "placeholders":{
+    "placeholder1":{
+      "description": "特殊說明"}}},
+"allTypePlaceholders": "測試 {k1} {k2} {k3} {k4} {k5} {k6}"
 }''');
     File(join(frPath, 'basic.arb')).writeAsStringSync('''{
   "plain": "test"
@@ -72,6 +79,8 @@ allTypePlaceholders: test {k1} {k2} {k3} {k4} {k5} {k6}
       temp.path,
       '--destination',
       temp.path,
+      '--base',
+      'en',
       '--author',
       'evan.lu',
       '--context',
@@ -134,7 +143,39 @@ allTypePlaceholders: test {k1} {k2} {k3} {k4} {k5} {k6}
       "@@locale": "zh",
       "@@author": "evan.lu",
       "@@context": "arb_glue",
-      "plain": "文字"
+      "featureWithPlaceholders": "YAML 客製化 {placeholder1} {placeholder2}",
+      "@featureWithPlaceholders": {
+        "description": "特殊說明",
+        "placeholders": {
+          "placeholder1": {
+            "type": "String",
+            "description": "特殊說明",
+            "example": "Example 1"
+          },
+          "placeholder2": {
+            "type": "num",
+            "description": "Placeholder 2",
+            "format": "compactCurrency",
+            "optionalParameters": {
+              "decimalDigits": 2,
+              "symbol": "@",
+              "customPattern": "0,0.00"
+            }
+          }
+        }
+      },
+      "featureAllTypePlaceholders": "測試 {k1} {k2} {k3} {k4} {k5} {k6}",
+      "@featureAllTypePlaceholders": {
+        "description": "test",
+        "placeholders": {
+          "k1": {"type": "int"},
+          "k2": {"type": "int"},
+          "k3": {"type": "double"},
+          "k4": {"type": "num"},
+          "k5": {"type": "DateTime"},
+          "k6": {"type": "String"}
+        }
+      }
     });
 
     expect(File(join(temp.path, 'fr.arb')).existsSync(), false);

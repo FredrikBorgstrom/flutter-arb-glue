@@ -14,6 +14,12 @@ class Options {
   /// Blacklisted folders inside the [source].
   final List<String> exclude;
 
+  /// The base locale of the arb file.
+  ///
+  /// If not provided, the base locale will be the first locale found in the
+  /// source folder.
+  final String? base;
+
   /// The author of the arb file.
   final String? author;
 
@@ -27,6 +33,7 @@ class Options {
     required this.source,
     required this.destination,
     this.exclude = const [],
+    this.base,
     this.author,
     this.context,
     this.verbose = false,
@@ -35,6 +42,7 @@ class Options {
   factory Options.fromArgs(List<String> args, Map<String, dynamic> o) {
     final src = o['source'] is String ? o['source'] : 'lib/l10n';
     final dst = o['destination'] is String ? o['destination'] : 'lib/l10n';
+    final base = o['base'] is String ? o['base'] : null;
     final author = o['author'] is String ? o['author'] : null;
     final context = o['context'] is String ? o['context'] : null;
     final verbose = o['verbose'] is bool ? o['verbose'] : false;
@@ -44,19 +52,21 @@ class Options {
     final parser = ArgParser()
       ..addOption('source', abbr: 's', defaultsTo: src)
       ..addOption('destination', abbr: 'd', defaultsTo: dst)
+      ..addMultiOption('exclude', abbr: 'e', defaultsTo: exclude)
+      ..addOption('base', abbr: 'b', defaultsTo: base)
       ..addOption('author', defaultsTo: author)
       ..addOption('context', defaultsTo: context)
-      ..addFlag('verbose', abbr: 'v', defaultsTo: verbose)
-      ..addMultiOption('exclude', abbr: 'e', defaultsTo: exclude);
+      ..addFlag('verbose', abbr: 'v', defaultsTo: verbose);
     final result = parser.parse(args);
 
     return Options(
       source: result['source'],
       destination: result['destination'],
+      exclude: result['exclude'],
+      base: result['base'],
       author: result['author'],
       context: result['context'],
       verbose: result['verbose'],
-      exclude: result['exclude'],
     );
   }
 
@@ -86,11 +96,21 @@ class Options {
 
   Iterable<Directory> folders() sync* {
     final all = Directory(source).listSync();
-    for (final entity in all) {
-      if (entity is Directory && !exclude.contains(basename(entity.path))) {
-        yield entity;
+    Iterable<Directory> filtered = all
+        .where((e) => e is Directory && !exclude.contains(basename(e.path)))
+        .cast<Directory>();
+
+    if (base != null) {
+      for (final e in filtered) {
+        if (basename(e.path) == base) {
+          yield e;
+        }
       }
+
+      filtered = filtered.where((e) => basename(e.path) != base);
     }
+
+    yield* filtered;
   }
 
   void write(String file, String content) {

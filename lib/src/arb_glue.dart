@@ -24,6 +24,7 @@ class ArbGlue {
 
   void run() {
     options.verify();
+    Arb? base;
     for (final folder in options.folders()) {
       final lang = basename(folder.path);
       _log('Processing $lang');
@@ -34,6 +35,7 @@ class ArbGlue {
         context: options.context,
         entities: <ArbEntity>[],
       );
+      base ??= arb;
       for (final file in folder.listSync()) {
         if (file is! File) {
           _log('  - ${file.path}: ⚠️ is not a file.');
@@ -48,6 +50,10 @@ class ArbGlue {
 
         _log('  ${file.path}: start');
         loader.load(file.readAsStringSync(), arb);
+      }
+
+      if (arb.locale != base.locale) {
+        arb.fallback(base);
       }
 
       _log('  writing to $lang.arb');

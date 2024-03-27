@@ -55,6 +55,17 @@ class Arb {
 
     return obj;
   }
+
+  void fallback(Arb base) {
+    for (final entity in entities) {
+      for (final baseE in base.entities) {
+        if (entity.key == baseE.key) {
+          entity.fallback(baseE);
+          break;
+        }
+      }
+    }
+  }
 }
 
 /// The entity of the arb file.
@@ -72,14 +83,14 @@ class ArbEntity {
   /// The description of the entity.
   ///
   /// It will be render as comment after generate from l10n.
-  final String? description;
+  String? description;
 
   /// The placeholders of the entity.
   ///
   /// It mostly used for plural, for example: `You have {count} messages`
-  final Map<String, ArbPlaceholder>? placeholders;
+  Map<String, ArbPlaceholder>? placeholders;
 
-  const ArbEntity({
+  ArbEntity({
     required this.key,
     required this.text,
     this.placeholders,
@@ -105,6 +116,25 @@ class ArbEntity {
 
     return obj;
   }
+
+  void fallback(ArbEntity base) {
+    description ??= base.description;
+    if (placeholders == null) {
+      placeholders = base.placeholders;
+      return;
+    }
+
+    final phs = base.placeholders ?? <String, ArbPlaceholder>{};
+    for (final entry in phs.entries) {
+      final ph = placeholders![entry.key];
+      if (ph == null) {
+        placeholders![entry.key] = entry.value;
+        continue;
+      }
+
+      ph.fallback(entry.value);
+    }
+  }
 }
 
 /// Placeholder of the entity, used for formatting.
@@ -115,10 +145,10 @@ class ArbPlaceholder {
   /// The description of the placeholder.
   ///
   /// It will be render as comment after generate from l10n.
-  final String? description;
+  String? description;
 
   /// The example of the placeholder.
-  final String? example;
+  String? example;
 
   /// The format of the placeholder.
   ///
@@ -133,20 +163,20 @@ class ArbPlaceholder {
   ///
   /// - DateTime https://pub.dev/documentation/intl/latest/intl/DateFormat-class.html
   /// - Number https://pub.dev/documentation/intl/latest/intl/NumberFormat-class.html
-  final String? format;
+  String? format;
 
   /// Use for currency, compactCurrency and compactSimpleCurrency in optionalParameters
-  final int? decimalDigits;
+  int? decimalDigits;
 
   /// Use for currency and compactCurrency in optionalParameters
-  final String? symbol;
+  String? symbol;
 
   /// Use for currency in optionalParameters
   ///
   /// see https://pub.dev/documentation/intl/latest/intl/NumberFormat/NumberFormat.currency.html
-  final String? customPattern;
+  String? customPattern;
 
-  const ArbPlaceholder({
+  ArbPlaceholder({
     required this.type,
     this.description,
     this.example,
@@ -184,6 +214,15 @@ class ArbPlaceholder {
     }
 
     return obj;
+  }
+
+  void fallback(ArbPlaceholder base) {
+    description ??= base.description;
+    example ??= base.example;
+    format ??= base.format;
+    decimalDigits ??= base.decimalDigits;
+    symbol ??= base.symbol;
+    customPattern ??= base.customPattern;
   }
 }
 
