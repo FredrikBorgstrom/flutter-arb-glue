@@ -1,0 +1,15 @@
+name: Publish package
+
+on:
+  # Pub.dev only allows automated publishing from GitHub Actions
+  # when the workflow is triggered by pushing a git tag to GitHub.
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+*"
+
+jobs:
+  # https://github.com/dart-lang/setup-dart/blob/main/.github/workflows/publish.yml
+  publish:
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+    with:
+      environment: pub.dev

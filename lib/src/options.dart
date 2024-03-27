@@ -38,8 +38,8 @@ class Options {
     final author = o['author'] is String ? o['author'] : null;
     final context = o['context'] is String ? o['context'] : null;
     final verbose = o['verbose'] is bool ? o['verbose'] : false;
-    final _exclude = o['exclude'];
-    final exclude = _exclude is Iterable ? _exclude.cast<String>() : <String>[];
+    final exc = o['exclude'];
+    final exclude = exc is Iterable ? exc.cast<String>() : <String>[];
 
     final parser = ArgParser()
       ..addOption('source', abbr: 's', defaultsTo: src)

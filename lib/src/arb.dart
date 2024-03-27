@@ -39,7 +39,7 @@ class Arb {
   Map<String, Object> toObject() {
     final obj = <String, Object>{
       '@@locale': locale,
-      '@@last_modified': DateTime.now().toIso8601String(),
+      '@@last_modified': DateTime.now().toUtc().toIso8601String(),
     };
 
     if (author != null) {
