@@ -1,5 +1,7 @@
 name: arb_glue
-description: "Concatenate multiple arb files into one."
+description: |
+  ARB Glue is a tool that merges multiple files into one single [ARB] format file,
+  facilitating the management of internationalization resources.
 version: 0.0.2
 homepage: https://github.com/evan361425/flutter-arb-glue
 
