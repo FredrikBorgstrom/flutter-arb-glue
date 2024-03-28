@@ -122,6 +122,11 @@ arb_glue:
   # The context of the arb file.
   # Type: String
   context:
+  # The base locale of the arb file.
+  # If not provided, the base locale will be the first locale found in the
+  # source folder.
+  # Type: String
+  base:
   # Whether to print verbose output.
   # Type: bool
   verbose: false

@@ -1,0 +1,24 @@
+{
+  "@@locale": "en",
+  "@@last_modified": "2024-03-28T11:50:10.946578Z",
+  "okButton": "OK",
+  "@okButton": {
+    "description": "Finish the process"
+  },
+  "cancelButton": "Cancel",
+  "@cancelButton": {
+    "description": "Cancel the process"
+  },
+  "feature1Title": "Feature 1",
+  "feature1Subtitle": "This feature is enabled at {date}",
+  "@feature1Subtitle": {
+    "description": "Placing below title",
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "description": "When is the feature enabled",
+        "example": "1995/01/23"
+      }
+    }
+  }
+}

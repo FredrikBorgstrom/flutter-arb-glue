@@ -8,7 +8,7 @@ Suppose we have the following directory structure containing language files:
 
 ```text
 .
-└── l10n/
+└── example/
     ├── en/
     │   ├── global.yaml
     │   └── feature-1.yaml
@@ -64,13 +64,13 @@ To merge these files using ARB Glue, follow these steps:
 
 1. Execute ARB Glue:
 
-    dart run arb_glue --source l10n --destination l10n --base en
+    dart run arb_glue --source example --destination example --base en
 
 2. Verify Output:
    After executing ARB Glue, the directory structure will be updated as follows:
 
     .
-    └── l10n/
+    └── example/
         ├── en/
         │   ├── global.yaml
         │   └── feature-1.yaml
@@ -87,7 +87,7 @@ Contents of `en.arb`:
 ```json
 {
   "@@locale": "en",
-  "@@last_modified": "2023-01-23T10:00:00.000000Z",
+  "@@last_modified": "2024-03-28T11:50:10.946578Z",
   "okButton": "OK",
   "@okButton": {
     "description": "Finish the process"
@@ -116,7 +116,7 @@ Contents of `zh.arb`:
 ```json
 {
   "@@locale": "zh",
-  "@@last_modified": "2023-01-23T10:00:01.11111",
+  "@@last_modified": "2024-03-28T11:50:10.950440Z",
   "okButton": "確定",
   "@okButton": {
     "description": "Finish the process"

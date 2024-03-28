@@ -1,0 +1,10 @@
+"@@context": "feature1"
+title: "Feature 1"
+subtitle:
+  text: "This feature is enabled at {date}"
+  description: Placing below title
+  placeholders:
+    date:
+      type: DateTime
+      description: When is the feature enabled
+      example: 1995/01/23

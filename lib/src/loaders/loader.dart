@@ -33,6 +33,14 @@ abstract class Loader {
       if (value is Map<String, dynamic>) {
         text = value.remove('text');
         info = value;
+      } else if (value is List) {
+        text = value[0];
+        info = {
+          if (value.length > 1 && value[1] is String) 'description': value[1],
+          if (value.length > 1 && value[1] is Map) 'placeholders': value[1],
+          if (value.length > 2 && value[2] is String) 'description': value[2],
+          if (value.length > 2 && value[2] is Map) 'placeholders': value[2],
+        };
       } else {
         text = value;
       }
@@ -41,7 +49,7 @@ abstract class Loader {
         key: k(key),
         text: text,
         description: _parseString(info, 'description'),
-        placeholders: _parsePlaceholders(info),
+        placeholders: _parsePlaceholders(_parseMap(info, 'placeholders')),
       ));
     }
   }
@@ -70,9 +78,9 @@ Map<String, dynamic> _parseMap(Map<String, dynamic> object, String key) {
   return <String, dynamic>{};
 }
 
-Map<String, ArbPlaceholder> _parsePlaceholders(Map<String, dynamic> info) {
+Map<String, ArbPlaceholder> _parsePlaceholders(Map<String, dynamic> data) {
   final phs = <String, ArbPlaceholder>{};
-  for (final phEntry in _parseMap(info, 'placeholders').entries) {
+  for (final phEntry in data.entries) {
     final ph = phEntry.value;
     if (ph is! Map<String, dynamic>) continue;
 

@@ -1,0 +1,6 @@
+okButton:
+  text: "OK"
+  description: "Finish the process"
+cancelButton:
+  text: "Cancel"
+  description: "Cancel the process"

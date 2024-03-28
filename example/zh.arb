@@ -1,0 +1,24 @@
+{
+  "@@locale": "zh",
+  "@@last_modified": "2024-03-28T11:50:10.950440Z",
+  "okButton": "確定",
+  "@okButton": {
+    "description": "Finish the process"
+  },
+  "cancelButton": "取消",
+  "@cancelButton": {
+    "description": "Cancel the process"
+  },
+  "feature1Title": "功能 1",
+  "feature1Subtitle": "這功能啟動於 {date}",
+  "@feature1Subtitle": {
+    "description": "Placing below title",
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "description": "When is the feature enabled",
+        "example": "1995/01/23"
+      }
+    }
+  }
+}

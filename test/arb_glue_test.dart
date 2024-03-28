@@ -59,7 +59,20 @@ allTypePlaceholders: test {k1} {k2} {k3} {k4} {k5} {k6}
     k3: {type: Double}
     k4: {type: Number}
     k5: {type: DateTime}
-    k6: {type: NotExist}''');
+    k6: {type: NotExist}
+byList1:
+- test {k1}
+- description
+- k1: {type: String}
+byList2:
+- test {k1}
+- k1: {type: String}
+- description
+''');
+    File(join(zhPath, 'basic.arb')).writeAsStringSync('''{
+  "plain": "Plain text"
+}
+''');
     File(join(zhPath, 'feature.arb'))
         .writeAsStringSync('''{"@@context": "feature",
 "withPlaceholders":{
@@ -134,6 +147,20 @@ allTypePlaceholders: test {k1} {k2} {k3} {k4} {k5} {k6}
           "k5": {"type": "DateTime"},
           "k6": {"type": "String"}
         }
+      },
+      "featureByList1": "test {k1}",
+      "@featureByList1": {
+        "description": "description",
+        "placeholders": {
+          "k1": {"type": "String"}
+        }
+      },
+      "featureByList2": "test {k1}",
+      "@featureByList2": {
+        "description": "description",
+        "placeholders": {
+          "k1": {"type": "String"}
+        }
       }
     });
 
@@ -143,6 +170,7 @@ allTypePlaceholders: test {k1} {k2} {k3} {k4} {k5} {k6}
       "@@locale": "zh",
       "@@author": "evan.lu",
       "@@context": "arb_glue",
+      "plain": "Plain text",
       "featureWithPlaceholders": "YAML 客製化 {placeholder1} {placeholder2}",
       "@featureWithPlaceholders": {
         "description": "特殊說明",
