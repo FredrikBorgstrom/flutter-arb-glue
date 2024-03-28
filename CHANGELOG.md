@@ -8,3 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 0.0.1
 
 Initial Release
+
+
+## [Unreleased]
+
+Please check git diff.
+
+## [v0.0.2] - 2024-03-28
+
+[unreleased]: https://github.com/evan361425/flutter-arb-glue/compare/v0.0.2...HEAD
+[v0.0.2]: https://github.com/evan361425/flutter-arb-glue/commits/v0.0.2
