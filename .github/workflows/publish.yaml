@@ -10,6 +10,8 @@ on:
 jobs:
   # https://github.com/dart-lang/setup-dart/blob/main/.github/workflows/publish.yml
   publish:
+    permissions:
+      id-token: write
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
     with:
       environment: pub.dev
