@@ -16,10 +16,15 @@ test-coverage: ## Run tests with coverage
 
 ##@ Build
 .PHONY: bump
-bump: install-bumper ## Bump version
+bump: ## install-bumper ## Bump version
 	@read -p "Enter new version: " version; \
-	if [ ! $$version =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]; then \
+	if [[ ! $$version =~ ^[0-9]+\.[0-9]+\.[0-9]+$$ ]]; then \
 		echo "Version must be in x.x.x format"; \
+		exit 1; \
+	fi; \
+	current=$$(grep '^version:' pubspec.yaml | head -n1 | cut -d' ' -f2); \
+	if [[ $$(echo -e "$$version\n$$current" | sort -V | head -n1) == $$version ]]; then \
+		echo "Version must be above $$current"; \
 		exit 1; \
 	fi; \
 	sed -i.bk '3s/version: *.*.*/version: '$$version'/' pubspec.yaml; \
