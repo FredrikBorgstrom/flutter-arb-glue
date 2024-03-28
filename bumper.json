@@ -1,6 +1,5 @@
 {
   "repoLink": "https://github.com/evan361425/flutter-arb-glue",
-  "beforeScripts": [["grep", "-q", "^version: {tag}", "pubspec.yaml"]],
   "changelog": {
     "template": "{content}",
     "commitMessage": "chore: bump to {version}"

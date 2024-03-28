@@ -16,6 +16,19 @@ test-coverage: ## Run tests with coverage
 
 ##@ Build
 .PHONY: bump
-bump: ## Bump version
+bump: install-bumper ## Bump version
 	@read -p "Enter new version: " version; \
-	bumper --latestVersion=$$version
+	if [ ! $$version =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]; then \
+		echo "Version must be in x.x.x format"; \
+		exit 1; \
+	fi; \
+	sed -i.bk '3s/version: *.*.*/version: '$$version'/' pubspec.yaml; \
+	rm pubspec.yaml.bk; \
+	bumper --latestVersion=v$$version
+
+##@ Tools
+.PHONY: install-bumper
+install-bumper: ## Install bumper
+	if ! command -v bumper &> /dev/null; then \
+		npm i --global @evan361425/version-bumper; \
+	fi

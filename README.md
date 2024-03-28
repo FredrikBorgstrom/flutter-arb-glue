@@ -51,9 +51,12 @@ In addition to ARB format, it allows writing descriptions directly into one key:
 
 ```json
 {
-  "myButton": "My Button",
+  "myButton": "My Button {type}",
   "@myButton": {
-    "description": "My custom button label"
+    "description": "My custom button label",
+    "placeholders": {
+      "type": {"type": "String"}
+    }
   }
 }
 ```
@@ -64,6 +67,17 @@ This is equivalent to:
 myButton:
   text: My Button
   description: My custom button label
+  placeholders:
+    type: {type: String}
+```
+
+And equal to:
+
+```yaml
+myButton:
+- My Button
+- My custom button label # description and placeholders can switch lines
+- type: {type: String}
 ```
 
 ### Context
