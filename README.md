@@ -1,6 +1,6 @@
 # ARB Glue
 
-[![codecov](https://codecov.io/gh/evan361425/flutter-arb-glue/branch/master/graph/badge.svg?token=kLLR8QWK9l)](https://codecov.io/gh/evan361425/flutter-arb-glue)
+[![codecov](https://codecov.io/gh/evan361425/flutter-arb-glue/graph/badge.svg?token=Y85VgUOsWZ)](https://codecov.io/gh/evan361425/flutter-arb-glue)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/003d6ab544314dee887aa57631e856c9)](https://www.codacy.com/gh/evan361425/flutter-arb-glue/dashboard)
 [![Pub Version](https://img.shields.io/pub/v/spotlight_ant)](https://pub.dev/packages/arb_glue)
 
