@@ -52,3 +52,5 @@ jobs:
         uses: codecov/codecov-action@v4
         with:
           file: coverage/lcov.info
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: evan361425/flutter-arb-glue
