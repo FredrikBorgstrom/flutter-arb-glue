@@ -69,6 +69,7 @@ To merge these files using ARB Glue, follow these steps:
 2. Verify Output:
    After executing ARB Glue, the directory structure will be updated as follows:
 
+   ```text
     .
     └── example/
         ├── en/
@@ -79,6 +80,7 @@ To merge these files using ARB Glue, follow these steps:
         │   └── feature-1.yaml
         ├── en.arb
         └── zh.arb
+    ```
 
 ### Output ARB Files
 
