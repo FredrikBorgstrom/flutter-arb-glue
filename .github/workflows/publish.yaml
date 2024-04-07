@@ -18,13 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
-        with:
-          cache: true
-          channel: "stable"
+      - uses: dart-lang/setup-dart@v1
       # Minimal package setup and dry run checks.
       - name: Install dependencies
-        run: dart pub get
+        run: make install
       - name: Publish - dry run
         run: dart pub publish --dry-run
       # Publishing, see

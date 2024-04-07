@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer' as developer;
 import 'dart:io';
 
 import 'package:logging/logging.dart';
@@ -21,19 +20,7 @@ const _loaders = <String, Loader>{
 class ArbGlue {
   final Options options;
 
-  ArbGlue(this.options) {
-    Logger.root.level = options.verbose ? Level.ALL : Level.WARNING;
-    Logger.root.onRecord.listen((record) {
-      developer.log(
-        record.message,
-        time: record.time,
-        name: 'arb_glue',
-        level: record.level.value,
-        error: record.error,
-        stackTrace: record.stackTrace,
-      );
-    });
-  }
+  const ArbGlue(this.options);
 
   void run() {
     options.verify();

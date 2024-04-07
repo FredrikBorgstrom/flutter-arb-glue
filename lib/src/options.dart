@@ -42,7 +42,7 @@ class Options {
     this.verbose = false,
   });
 
-  factory Options.fromArgs(List<String> args, Map<String, dynamic> o) {
+  static ArgParser getArgParser(List<String> args, Map<String, dynamic> o) {
     final src = o['source'] is String ? o['source'] : 'lib/l10n';
     final dst = o['destination'] is String ? o['destination'] : 'lib/l10n';
     final base = o['base'] is String ? o['base'] : null;
@@ -60,17 +60,27 @@ class Options {
       ..addOption('author', defaultsTo: author)
       ..addOption('context', defaultsTo: context)
       ..addFlag('verbose', abbr: 'v', defaultsTo: verbose);
-    final result = parser.parse(args);
 
-    return Options(
-      source: result['source'],
-      destination: result['destination'],
-      exclude: result['exclude'],
-      base: result['base'],
-      author: result['author'],
-      context: result['context'],
-      verbose: result['verbose'],
+    return parser;
+  }
+
+  factory Options.fromArgs(List<String> args, Map<String, dynamic> o) {
+    final parsed = getArgParser(args, o).parse(args);
+    final options = Options(
+      source: parsed['source'],
+      destination: parsed['destination'],
+      exclude: parsed['exclude'],
+      base: parsed['base'],
+      author: parsed['author'],
+      context: parsed['context'],
+      verbose: parsed['verbose'],
     );
+
+    Logger.root.level = options.verbose ? Level.ALL : Level.WARNING;
+    // ignore: avoid_print
+    Logger.root.onRecord.listen((record) => print(record.message));
+
+    return options;
   }
 
   void verify() {

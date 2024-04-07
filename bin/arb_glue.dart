@@ -3,7 +3,19 @@ import 'dart:io';
 import 'package:arb_glue/arb_glue.dart';
 import 'package:yaml/yaml.dart';
 
-void main(List<String> args) {
+Future<void> main(List<String> args) async {
+  if (args.contains('--help') || args.contains('-h')) {
+    // ignore: avoid_print
+    print([
+      'arb_glue: Generate arb files from the source folder.',
+      '',
+      'Usage: arb_glue [options]',
+      '',
+      'Options:',
+      Options.getArgParser(args, _loadPubSpec()).usage,
+    ].join('\n'));
+    return;
+  }
   final option = Options.fromArgs(args, _loadPubSpec());
   final glue = ArbGlue(option);
 

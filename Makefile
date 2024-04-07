@@ -5,17 +5,25 @@ help: ## Display this help
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_0-9-]+:.*?##/ { printf "  \033[36m%-23s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
 
 ##@ Development
+.PHONY: install
+install: ## Install dependencies
+	dart pub get
+
+.PHONY: lint
+lint: ## Lint code
+	dart analyze .
+
 .PHONY: format
 format: ## Format code
 	dart format --set-exit-if-changed --line-length 120 .
 
 .PHONY: test
 test: ## Run tests
-	flutter test
+	dart test
 
 .PHONY: test-coverage
 test-coverage: ## Run tests with coverage
-	flutter test --coverage
+	dart run coverage:test_with_coverage
 	genhtml coverage/lcov.info -o coverage/html
 
 ##@ Build

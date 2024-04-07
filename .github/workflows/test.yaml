@@ -21,31 +21,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Setup the flutter environment.
-      - uses: subosito/flutter-action@v2
-        with:
-          cache: true
-          channel: "stable"
+      # Setup the dart environment.
+      - uses: dart-lang/setup-dart@v1
 
-      # Get flutter dependencies.
+      # Get dart dependencies.
       - name: Install dependencies
-        run: flutter pub get
+        run: make install
 
       # Statically analyze the Dart code for any errors.
       - name: Linter
-        run: flutter analyze .
+        run: make lint
 
       - name: Format
         run: make format
 
-      # Run widget tests for our flutter project.
+      # Run widget tests for our dart project.
       - name: Testing
         if: github.event_name == 'pull_request'
-        run: flutter test --no-pub --no-test-assets
+        run: make test
 
       - name: Testing with Coverage
         if: github.event_name != 'pull_request'
-        run: flutter test --coverage --no-pub --no-test-assets
+        run: make test-coverage
 
       - name: Coverage to codecov
         if: github.event_name != 'pull_request'

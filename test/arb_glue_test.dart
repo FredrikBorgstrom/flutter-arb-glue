@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:arb_glue/arb_glue.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart';
+import 'package:test/test.dart';
 
 void main() {
   late final Directory temp;
