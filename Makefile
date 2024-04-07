@@ -24,7 +24,7 @@ test: ## Run tests
 .PHONY: test-coverage
 test-coverage: ## Run tests with coverage
 	dart run coverage:test_with_coverage
-	genhtml coverage/lcov.info -o coverage/html
+	if which genhtml > /dev/null; then genhtml coverage/lcov.info -o coverage/html; fi
 
 ##@ Build
 .PHONY: bump

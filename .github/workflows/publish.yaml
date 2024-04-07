@@ -35,6 +35,6 @@ jobs:
             "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=https://pub.dev" | jq -r '.value')
           echo "PUB_TOKEN=$token" >> $GITHUB_ENV
           export PUB_TOKEN=$token
-          flutter pub token add https://pub.dev --env-var PUB_TOKEN
+          dart pub token add https://pub.dev --env-var PUB_TOKEN
       - name: Publish to pub.dev
         run: dart pub publish --force
