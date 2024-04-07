@@ -39,7 +39,7 @@ bump: ## install-bumper ## Bump version
 		echo "Version must be above $$current"; \
 		exit 1; \
 	fi; \
-	sed -i.bk '8s/version: *.*.*/version: '$$version'/' pubspec.yaml; \
+	sed -i.bk '5s/version: *.*.*/version: '$$version'/' pubspec.yaml; \
 	rm pubspec.yaml.bk; \
 	bumper --latestVersion=v$$version
 
