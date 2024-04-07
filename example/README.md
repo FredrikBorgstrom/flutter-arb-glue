@@ -103,7 +103,7 @@ Contents of `en.arb`:
 ```json
 {
   "@@locale": "en",
-  "@@last_modified": "2024-04-07T01:58:53.695690Z",
+  "@@last_modified": "2024-04-07T09:38:31.921878Z",
   "okButton": "OK",
   "@okButton": {
     "description": "Finish the process"
@@ -149,7 +149,7 @@ Contents of `zh.arb`:
 ```json
 {
   "@@locale": "zh",
-  "@@last_modified": "2024-04-07T01:58:53.708019Z",
+  "@@last_modified": "2024-04-07T09:38:31.933935Z",
   "okButton": "確定",
   "@okButton": {
     "description": "Finish the process"

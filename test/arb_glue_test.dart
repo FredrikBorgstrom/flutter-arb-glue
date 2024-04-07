@@ -26,9 +26,6 @@ void main() {
     Directory(join(enPath, 'sub-dir')).createSync();
     File(join(enPath, 'basic.yaml')).writeAsStringSync('''
 plain: Plain text
-yamlCustom:
-  text: YAML custom
-  description: YAML custom with description
 withDescription: With description
 "@withDescription":
   description: "With description"
@@ -43,33 +40,30 @@ withPlural:
   =1: One Item
   other: '{count} Items'
 - {count: {type: int, mode: plural}}
-deep:
-  \$prefix: deep
-  button: Deep Button
-missingText:
-  description: Missing text
+byNested:
+  \$prefix: customPrefix
+  button: Nested Button
 invalidSelect:
 - [car, Car]
 - {tool: {}}
 ''');
     File(join(enPath, 'feature.yml')).writeAsStringSync('''\$prefix: feature
 withPlaceholders:
-  text: YAML custom with {placeholder1} {placeholder2}
-  description: YAML custom with placeholders with description
-  placeholders:
-    placeholder1:
-      type: String
-      description: Placeholder 1
-      example: Example 1
-    placeholder2:
-      type: Number
-      description: Placeholder 2
-      example: 100
-      format: compactCurrency
-      optionalParameters:
-        symbol: '@'
-        customPattern: '0,0.00'
-        decimalDigits: 2
+- YAML custom with {placeholder1} {placeholder2}
+- YAML custom with placeholders with description
+- placeholder1:
+    type: String
+    description: Placeholder 1
+    example: Example 1
+  placeholder2:
+    type: Number
+    description: Placeholder 2
+    example: 100
+    format: compactCurrency
+    optionalParameters:
+      symbol: '@'
+      customPattern: '0,0.00'
+      decimalDigits: 2
 allTypePlaceholders: test {k1} {k2} {k3} {k4} {k5} {k6}
 '@allTypePlaceholders':
   description: test
@@ -94,8 +88,8 @@ byList2:
 }
 ''');
     File(join(zhPath, 'feature.arb')).writeAsStringSync('''{"\$prefix": "feature",
-"withPlaceholders":{
-  "text": "YAML 客製化 {placeholder1} {placeholder2}",
+"withPlaceholders": "YAML 客製化 {placeholder1} {placeholder2}",
+"@withPlaceholders": {
   "description": "特殊說明",
   "placeholders":{
     "placeholder1":{
@@ -129,8 +123,6 @@ byList2:
       "@@author": "evan.lu",
       "@@context": "arb_glue",
       "plain": "Plain text",
-      "yamlCustom": "YAML custom",
-      "@yamlCustom": {"description": "YAML custom with description"},
       "withDescription": "With description",
       "@withDescription": {"description": "With description"},
       "withSelect": "{tool, select, car{Car} bicycle{Bicycle} scooter{Scooter} other{UNKNOWN}}",
@@ -145,7 +137,7 @@ byList2:
           "count": {"type": "int"}
         }
       },
-      "deepButton": "Deep Button",
+      "customPrefixButton": "Nested Button",
       "invalidSelect": "[car, Car]",
       "@invalidSelect": {
         "placeholders": {

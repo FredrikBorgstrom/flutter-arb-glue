@@ -1,5 +1,3 @@
-import 'package:logging/logging.dart';
-
 import '../arb.dart';
 
 /// The loader interface.
@@ -22,11 +20,10 @@ abstract class Loader {
 
   /// Five ways to load the content.
   ///
-  /// 1. pure text
-  /// 2. deep load
-  /// 3. map with text and meta
-  /// 4. list with text and meta
-  /// 5. text with meta
+  /// 1. nested load
+  /// 2. list with text and meta
+  /// 3. text with meta
+  /// 4. pure text
   void _load(Map<String, dynamic> object, Arb arb, String? prefix) {
     final ck =
         prefix == null ? (String key) => key : (String key) => '$prefix${key[0].toUpperCase()}${key.substring(1)}';
@@ -40,32 +37,17 @@ abstract class Loader {
 
       var meta = object['@$key'];
 
-      // 1. pure text
-      if (meta is! Map<String, dynamic> && value is String) {
-        arb.entities.add(ArbEntity(key: ck(key), text: value));
+      // 1. nested load
+      if (value is Map<String, dynamic>) {
+        final prefix2 = value.remove(r'$prefix');
+        final nested = prefix2 is String ? prefix2 : key;
+        _load(value, arb, ck(nested));
         continue;
       }
 
-      late final String text;
-      if (value is Map<String, dynamic>) {
-        // 2. deep load
-        final deep = value.remove(r'$prefix');
-        if (deep is String) {
-          _load(value, arb, ck(deep));
-          continue;
-        }
-
-        // 3. map with text and meta
-        if (!value.containsKey('text')) {
-          Logger.root.warning('  $key: missing text, ignore this entry');
-          continue;
-        }
-
-        final input = value.remove('text');
-        meta = value;
-        text = _parseTextOrSpecial(input, meta);
-      } else if (value is List) {
-        // 4. list with text and meta
+      String text;
+      if (value is List) {
+        // 2. list with text and meta
         meta = {
           if (value.length > 1 && value[1] is String) 'description': value[1],
           if (value.length > 1 && value[1] is Map<String, dynamic>) 'placeholders': value[1],
@@ -74,8 +56,13 @@ abstract class Loader {
         };
         text = _parseTextOrSpecial(value[0], meta);
       } else {
-        // 5. text with meta
+        // 3. text with meta
         text = value.toString();
+        // 4. pure text
+        if (meta is! Map<String, dynamic>) {
+          arb.entities.add(ArbEntity(key: ck(key), text: text));
+          continue;
+        }
       }
 
       arb.entities.add(ArbEntity(

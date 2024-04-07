@@ -1,5 +1,5 @@
-okButton:
-  text: "OK"
+okButton: "OK"
+"@okButton":
   description: "Finish the process"
 cancelButton:
 - Cancel
@@ -16,5 +16,4 @@ transportation:
   other: UNKNOWN
 - {tool: {}}
 dialog:
-  $prefix: dialog
   title: "Dialog"

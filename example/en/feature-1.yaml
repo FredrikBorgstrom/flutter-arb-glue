@@ -1,7 +1,7 @@
 $prefix: feature1
 title: "Feature 1"
-subtitle:
-  text: "This feature is enabled at {date}"
+subtitle: "This feature is enabled at {date}"
+"@subtitle":
   description: Placing below title
   placeholders:
     date:

@@ -12,7 +12,7 @@ Features:
 -   [YAML](#supported-formats), which allows comment and multiple lines string;
 -   [Multiple files merge into one](#usage);
 -   [Set prefix on each file](#prefix);
--   [Deep structure](#deep-structure);
+-   [Nested structure](#nested-structure);
 -   [Map structure on `select` and `plural`](#select-and-plural);
 -   Placeholders are only needed in the base language.
 
@@ -92,8 +92,8 @@ In addition to ARB format, it allows writing descriptions directly into one key:
 This is equivalent to:
 
 ```yaml
-myButton:
-  text: My Button
+myButton: My Button
+"@myButton":
   description: My custom button label
   placeholders:
     type: {type: String}
@@ -104,7 +104,8 @@ And equal to:
 ```yaml
 myButton:
 - My Button
-- My custom button label # description and placeholders can switch lines
+# description and placeholders can switch position
+- My custom button label
 - type: {type: String}
 ```
 
@@ -125,14 +126,14 @@ This will render as:
 }
 ```
 
-### Deep Structure
+### Nested Structure
 
-`arb_glue` allow deep structure:
+`arb_glue` allow nested structure:
 
 ```yaml
 $prefix: myFeature
-subModule: # this key will not been used, but it is convenient to set as `$prefix` below
-  $prefix: subModule # this is required, if not provide it will consider as normal text-meta pair
+subModule: # this key is the default prefix value
+  $prefix: awesome # it can be customize by `$prefix`
   button: My Awesome Button
 ```
 
@@ -140,7 +141,7 @@ This will render as:
 
 ```json
 {
-  "myFeatureSubModuleButton": "My Awesome Button"
+  "myFeatureAwesomeButton": "My Awesome Button"
 }
 ```
 
