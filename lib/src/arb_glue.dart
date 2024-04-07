@@ -57,7 +57,7 @@ class ArbGlue {
       }
 
       const encoder = JsonEncoder.withIndent('  ');
-      options.write('$lang.arb', encoder.convert(arb.toObject()));
+      options.write(lang, encoder.convert(arb.toObject()));
     }
   }
 }

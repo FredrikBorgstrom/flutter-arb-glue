@@ -228,6 +228,8 @@ arb_glue:
   # `base` locale can fallback placeholder to other locales.
   # Type: String
   base:
+  # The file template for the output arb file.
+  fileTemplate: '{lang}.arb'
   # Whether to print verbose output.
   # Type: bool
   verbose: false

@@ -29,6 +29,9 @@ class Options {
   /// The context of the arb file.
   final String? context;
 
+  /// The file template for the output arb file.
+  final String fileTemplate;
+
   /// Whether to print verbose output.
   final bool verbose;
 
@@ -39,6 +42,7 @@ class Options {
     this.base,
     this.author,
     this.context,
+    this.fileTemplate = '{lang}.arb',
     this.verbose = false,
   });
 
@@ -48,6 +52,7 @@ class Options {
     final base = o['base'] is String ? o['base'] : null;
     final author = o['author'] is String ? o['author'] : null;
     final context = o['context'] is String ? o['context'] : null;
+    final fileTemplate = o['fileTemplate'] is String ? o['fileTemplate'] : '{lang}.arb';
     final verbose = o['verbose'] is bool ? o['verbose'] : false;
     final exc = o['exclude'];
     final exclude = exc is Iterable ? exc.cast<String>() : <String>[];
@@ -59,6 +64,7 @@ class Options {
       ..addOption('base', abbr: 'b', defaultsTo: base)
       ..addOption('author', defaultsTo: author)
       ..addOption('context', defaultsTo: context)
+      ..addOption('fileTemplate', defaultsTo: fileTemplate)
       ..addFlag('verbose', abbr: 'v', defaultsTo: verbose);
 
     return parser;
@@ -73,12 +79,14 @@ class Options {
       base: parsed['base'],
       author: parsed['author'],
       context: parsed['context'],
+      fileTemplate: parsed['fileTemplate'],
       verbose: parsed['verbose'],
     );
 
     Logger.root.level = options.verbose ? Level.ALL : Level.WARNING;
     // ignore: avoid_print
     Logger.root.onRecord.listen((record) => print(record.message));
+    Logger.root.info(options.toString());
 
     return options;
   }
@@ -125,7 +133,8 @@ class Options {
     yield* filtered;
   }
 
-  void write(String file, String content) {
+  void write(String lang, String content) {
+    final file = fileTemplate.replaceAll('{lang}', lang);
     Logger.root.info('writing to ${join(destination, file)}');
     File(join(destination, file)).writeAsStringSync(content);
   }
