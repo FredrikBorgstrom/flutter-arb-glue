@@ -17,12 +17,12 @@ test-coverage: ## Run tests with coverage
 ##@ Build
 .PHONY: bump
 bump: ## install-bumper ## Bump version
-	@read -p "Enter new version: " version; \
+	@current=$$(grep '^version:' pubspec.yaml | head -n1 | cut -d' ' -f2); \
+	read -p "Enter new version(current is $$current): " version; \
 	if [[ ! $$version =~ ^[0-9]+\.[0-9]+\.[0-9]+$$ ]]; then \
 		echo "Version must be in x.x.x format"; \
 		exit 1; \
 	fi; \
-	current=$$(grep '^version:' pubspec.yaml | head -n1 | cut -d' ' -f2); \
 	if [[ $$(echo -e "$$version\n$$current" | sort -V | head -n1) == $$version ]]; then \
 		echo "Version must be above $$current"; \
 		exit 1; \
