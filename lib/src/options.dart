@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:args/args.dart';
+import 'package:logging/logging.dart';
 import 'package:path/path.dart';
 
 /// The options for the arb glue.
@@ -18,6 +19,8 @@ class Options {
   ///
   /// If not provided, the base locale will be the first locale found in the
   /// source folder.
+  ///
+  /// *base* locale can fallback placeholder to other locales.
   final String? base;
 
   /// The author of the arb file.
@@ -96,9 +99,8 @@ class Options {
 
   Iterable<Directory> folders() sync* {
     final all = Directory(source).listSync();
-    Iterable<Directory> filtered = all
-        .where((e) => e is Directory && !exclude.contains(basename(e.path)))
-        .cast<Directory>();
+    Iterable<Directory> filtered =
+        all.where((e) => e is Directory && !exclude.contains(basename(e.path))).cast<Directory>();
 
     if (base != null) {
       for (final e in filtered) {
@@ -114,6 +116,7 @@ class Options {
   }
 
   void write(String file, String content) {
+    Logger.root.info('writing to ${join(destination, file)}');
     File(join(destination, file)).writeAsStringSync(content);
   }
 }

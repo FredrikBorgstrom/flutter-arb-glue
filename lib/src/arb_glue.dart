@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer' as developer;
 import 'dart:io';
 
+import 'package:logging/logging.dart';
 import 'package:path/path.dart';
 
 import 'arb.dart';
@@ -20,14 +21,26 @@ const _loaders = <String, Loader>{
 class ArbGlue {
   final Options options;
 
-  const ArbGlue(this.options);
+  ArbGlue(this.options) {
+    Logger.root.level = options.verbose ? Level.ALL : Level.WARNING;
+    Logger.root.onRecord.listen((record) {
+      developer.log(
+        record.message,
+        time: record.time,
+        name: 'arb_glue',
+        level: record.level.value,
+        error: record.error,
+        stackTrace: record.stackTrace,
+      );
+    });
+  }
 
   void run() {
     options.verify();
     Arb? base;
     for (final folder in options.folders()) {
       final lang = basename(folder.path);
-      _log('Processing $lang');
+      Logger.root.info('=== Start language $lang ===');
 
       final arb = Arb(
         locale: lang,
@@ -38,17 +51,17 @@ class ArbGlue {
       base ??= arb;
       for (final file in folder.listSync()) {
         if (file is! File) {
-          _log('  - ${file.path}: ⚠️ is not a file.');
+          Logger.root.warning('${file.path}: is not a file.');
           continue;
         }
 
         final loader = _loaders[extension(file.path)];
         if (loader == null) {
-          _log('  ${file.path}: ⚠️ extension is not supported.');
+          Logger.root.warning('${file.path}: extension is not supported.');
           continue;
         }
 
-        _log('  ${file.path}: start');
+        Logger.root.info('${file.path}: start');
         loader.load(file.readAsStringSync(), arb);
       }
 
@@ -56,15 +69,8 @@ class ArbGlue {
         arb.fallback(base);
       }
 
-      _log('  writing to $lang.arb');
       const encoder = JsonEncoder.withIndent('  ');
       options.write('$lang.arb', encoder.convert(arb.toObject()));
-    }
-  }
-
-  void _log(String message) {
-    if (options.verbose) {
-      developer.log(message, name: 'arb_glue');
     }
   }
 }

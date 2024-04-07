@@ -105,10 +105,7 @@ class ArbEntity {
       info['description'] = description!;
     }
     if (placeholders?.isNotEmpty == true) {
-      info['placeholders'] = {
-        for (final entry in placeholders!.entries)
-          entry.key: entry.value.toObject()
-      };
+      info['placeholders'] = {for (final entry in placeholders!.entries) entry.key: entry.value.toObject()};
     }
     if (info.isNotEmpty) {
       obj['@$key'] = info;

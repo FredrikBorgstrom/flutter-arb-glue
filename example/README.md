@@ -24,8 +24,22 @@ okButton:
   text: "OK"
   description: "Finish the process"
 cancelButton:
-  text: "Cancel"
-  description: "Cancel the process"
+- Cancel
+- Cancel the process
+counter:
+- =0: No items
+  =1: One item
+  other: '{count} items'
+- {count: {type: int, mode: plural}}
+transportation:
+- car: Car
+  bicycle: Bicycle
+  scooter: Scooter
+  other: UNKNOWN
+- {tool: {}}
+dialog:
+  $prefix: dialog
+  title: "Dialog"
 ```
 
 ### Contents of feature-1.yaml (English)
@@ -89,7 +103,7 @@ Contents of `en.arb`:
 ```json
 {
   "@@locale": "en",
-  "@@last_modified": "2024-03-28T11:50:10.946578Z",
+  "@@last_modified": "2024-04-07T01:58:53.695690Z",
   "okButton": "OK",
   "@okButton": {
     "description": "Finish the process"
@@ -98,6 +112,23 @@ Contents of `en.arb`:
   "@cancelButton": {
     "description": "Cancel the process"
   },
+  "counter": "{count, plural, =0{No items} =1{One item} other{{count} items}}",
+  "@counter": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "transportation": "{tool, select, car{Car} bicycle{Bicycle} scooter{Scooter} other{UNKNOWN}}",
+  "@transportation": {
+    "placeholders": {
+      "tool": {
+        "type": "String"
+      }
+    }
+  },
+  "dialogTitle": "Dialog",
   "feature1Title": "Feature 1",
   "feature1Subtitle": "This feature is enabled at {date}",
   "@feature1Subtitle": {
@@ -118,7 +149,7 @@ Contents of `zh.arb`:
 ```json
 {
   "@@locale": "zh",
-  "@@last_modified": "2024-03-28T11:50:10.950440Z",
+  "@@last_modified": "2024-04-07T01:58:53.708019Z",
   "okButton": "確定",
   "@okButton": {
     "description": "Finish the process"

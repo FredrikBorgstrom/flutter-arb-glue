@@ -24,15 +24,35 @@ void main() {
     Directory(frPath).createSync();
     File(join(enPath, 'wrong.ext')).writeAsStringSync('test');
     Directory(join(enPath, 'sub-dir')).createSync();
-    File(join(enPath, 'basic.yaml')).writeAsStringSync('''"@@context": global
+    File(join(enPath, 'basic.yaml')).writeAsStringSync('''
 plain: Plain text
 yamlCustom:
   text: YAML custom
   description: YAML custom with description
 withDescription: With description
 "@withDescription":
-  description: "With description"''');
-    File(join(enPath, 'feature.yml')).writeAsStringSync('''"@@context": feature
+  description: "With description"
+withSelect:
+- car: Car
+  bicycle: Bicycle
+  scooter: Scooter
+  other: UNKNOWN
+- {tool: {}}
+withPlural:
+- =0: Empty
+  =1: One Item
+  other: '{count} Items'
+- {count: {type: int, mode: plural}}
+deep:
+  \$prefix: deep
+  button: Deep Button
+missingText:
+  description: Missing text
+invalidSelect:
+- [car, Car]
+- {tool: {}}
+''');
+    File(join(enPath, 'feature.yml')).writeAsStringSync('''\$prefix: feature
 withPlaceholders:
   text: YAML custom with {placeholder1} {placeholder2}
   description: YAML custom with placeholders with description
@@ -73,8 +93,7 @@ byList2:
   "plain": "Plain text"
 }
 ''');
-    File(join(zhPath, 'feature.arb'))
-        .writeAsStringSync('''{"@@context": "feature",
+    File(join(zhPath, 'feature.arb')).writeAsStringSync('''{"\$prefix": "feature",
 "withPlaceholders":{
   "text": "YAML 客製化 {placeholder1} {placeholder2}",
   "description": "特殊說明",
@@ -114,25 +133,35 @@ byList2:
       "@yamlCustom": {"description": "YAML custom with description"},
       "withDescription": "With description",
       "@withDescription": {"description": "With description"},
-      "featureWithPlaceholders":
-          "YAML custom with {placeholder1} {placeholder2}",
+      "withSelect": "{tool, select, car{Car} bicycle{Bicycle} scooter{Scooter} other{UNKNOWN}}",
+      "@withSelect": {
+        "placeholders": {
+          "tool": {"type": "String"}
+        }
+      },
+      "withPlural": "{count, plural, =0{Empty} =1{One Item} other{{count} Items}}",
+      "@withPlural": {
+        "placeholders": {
+          "count": {"type": "int"}
+        }
+      },
+      "deepButton": "Deep Button",
+      "invalidSelect": "[car, Car]",
+      "@invalidSelect": {
+        "placeholders": {
+          "tool": {"type": "String"}
+        }
+      },
+      "featureWithPlaceholders": "YAML custom with {placeholder1} {placeholder2}",
       "@featureWithPlaceholders": {
         "description": "YAML custom with placeholders with description",
         "placeholders": {
-          "placeholder1": {
-            "type": "String",
-            "description": "Placeholder 1",
-            "example": "Example 1"
-          },
+          "placeholder1": {"type": "String", "description": "Placeholder 1", "example": "Example 1"},
           "placeholder2": {
             "type": "num",
             "description": "Placeholder 2",
             "format": "compactCurrency",
-            "optionalParameters": {
-              "decimalDigits": 2,
-              "symbol": "@",
-              "customPattern": "0,0.00"
-            }
+            "optionalParameters": {"decimalDigits": 2, "symbol": "@", "customPattern": "0,0.00"}
           }
         }
       },
@@ -175,20 +204,12 @@ byList2:
       "@featureWithPlaceholders": {
         "description": "特殊說明",
         "placeholders": {
-          "placeholder1": {
-            "type": "String",
-            "description": "特殊說明",
-            "example": "Example 1"
-          },
+          "placeholder1": {"type": "String", "description": "特殊說明", "example": "Example 1"},
           "placeholder2": {
             "type": "num",
             "description": "Placeholder 2",
             "format": "compactCurrency",
-            "optionalParameters": {
-              "decimalDigits": 2,
-              "symbol": "@",
-              "customPattern": "0,0.00"
-            }
+            "optionalParameters": {"decimalDigits": 2, "symbol": "@", "customPattern": "0,0.00"}
           }
         }
       },

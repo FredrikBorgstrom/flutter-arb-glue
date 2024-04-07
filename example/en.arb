@@ -1,6 +1,6 @@
 {
   "@@locale": "en",
-  "@@last_modified": "2024-03-28T11:50:10.946578Z",
+  "@@last_modified": "2024-04-07T02:09:10.391078Z",
   "okButton": "OK",
   "@okButton": {
     "description": "Finish the process"
@@ -9,6 +9,23 @@
   "@cancelButton": {
     "description": "Cancel the process"
   },
+  "counter": "{count, plural, =0{No items} =1{One item} other{{count} items}}",
+  "@counter": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "transportation": "{tool, select, car{Car} bicycle{Bicycle} scooter{Scooter} other{UNKNOWN}}",
+  "@transportation": {
+    "placeholders": {
+      "tool": {
+        "type": "String"
+      }
+    }
+  },
+  "dialogTitle": "Dialog",
   "feature1Title": "Feature 1",
   "feature1Subtitle": "This feature is enabled at {date}",
   "@feature1Subtitle": {

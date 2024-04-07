@@ -2,5 +2,19 @@ okButton:
   text: "OK"
   description: "Finish the process"
 cancelButton:
-  text: "Cancel"
-  description: "Cancel the process"
+- Cancel
+- Cancel the process
+counter:
+- =0: No items
+  =1: One item
+  other: '{count} items'
+- {count: {type: int, mode: plural}}
+transportation:
+- car: Car
+  bicycle: Bicycle
+  scooter: Scooter
+  other: UNKNOWN
+- {tool: {}}
+dialog:
+  $prefix: dialog
+  title: "Dialog"

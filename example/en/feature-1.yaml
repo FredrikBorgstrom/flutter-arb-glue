@@ -1,4 +1,4 @@
-"@@context": "feature1"
+$prefix: feature1
 title: "Feature 1"
 subtitle:
   text: "This feature is enabled at {date}"

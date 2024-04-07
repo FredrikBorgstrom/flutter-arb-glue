@@ -31,6 +31,10 @@ bump: ## install-bumper ## Bump version
 	rm pubspec.yaml.bk; \
 	bumper --latestVersion=v$$version
 
+.PHONY: build-example
+build-example: ## Build example
+	dart run arb_glue --source example --destination example --base en
+
 ##@ Tools
 .PHONY: install-bumper
 install-bumper: ## Install bumper
