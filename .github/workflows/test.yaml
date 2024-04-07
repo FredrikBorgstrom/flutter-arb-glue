@@ -36,7 +36,7 @@ jobs:
         run: flutter analyze .
 
       - name: Format
-        run: dart format --set-exit-if-changed --line-length 80 .
+        run: make format
 
       # Run widget tests for our flutter project.
       - name: Testing

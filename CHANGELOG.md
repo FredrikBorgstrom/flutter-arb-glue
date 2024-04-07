@@ -11,7 +11,8 @@ Please check git diff.
 
 ## [v0.1.0] - 2024-04-07
 
-
+-   feat: add nested structure with prefix
+-   feat: add select and plural support
 
 ## [v0.0.2] - 2024-03-28
 
