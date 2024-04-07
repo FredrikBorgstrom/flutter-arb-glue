@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Please check git diff.
 
+## [v0.2.0] - 2024-04-07
+
+-   fix: no need prefix by default
+
 ## [v0.1.0] - 2024-04-07
 
 -   feat: add nested structure with prefix
@@ -22,6 +26,7 @@ Please check git diff.
 
 Initial Release
 
-[unreleased]: https://github.com/evan361425/flutter-arb-glue/compare/v0.1.0...HEAD
+[unreleased]: https://github.com/evan361425/flutter-arb-glue/compare/v0.2.0...HEAD
+[v0.2.0]: https://github.com/evan361425/flutter-arb-glue/compare/v0.1.0...v0.2.0
 [v0.1.0]: https://github.com/evan361425/flutter-arb-glue/compare/v0.0.2...v0.1.0
 [v0.0.2]: https://github.com/evan361425/flutter-arb-glue/commits/v0.0.2
