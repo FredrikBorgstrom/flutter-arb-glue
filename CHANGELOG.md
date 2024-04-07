@@ -11,7 +11,7 @@ Please check git diff.
 
 ## [v0.2.1] - 2024-04-07
 
-
+-   fix: using print not develop log
 
 ## [v0.2.0] - 2024-04-07
 
