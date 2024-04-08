@@ -1,6 +1,6 @@
 {
   "@@locale": "en",
-  "@@last_modified": "2024-04-07T09:38:31.921878Z",
+  "@@last_modified": "2024-04-08T01:13:10.592126Z",
   "okButton": "OK",
   "@okButton": {
     "description": "Finish the process"
@@ -35,6 +35,18 @@
         "type": "DateTime",
         "description": "When is the feature enabled",
         "example": "1995/01/23"
+      }
+    }
+  },
+  "feature1Price": "You have {money}",
+  "@feature1Price": {
+    "placeholders": {
+      "money": {
+        "type": "num",
+        "format": "compactCurrency",
+        "optionalParameters": {
+          "symbol": "$"
+        }
       }
     }
   }

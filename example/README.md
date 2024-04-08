@@ -45,16 +45,19 @@ dialog:
 ### Contents of feature-1.yaml (English)
 
 ```yaml
-"@@context": "feature1"
+$prefix: feature1
 title: "Feature 1"
-subtitle:
-  text: "This feature is enabled at {date}"
+subtitle: "This feature is enabled at {date}"
+"@subtitle":
   description: Placing below title
   placeholders:
     date:
       type: DateTime
       description: When is the feature enabled
       example: 1995/01/23
+price:
+- "You have {money}"
+- money: {type: num, format: compactCurrency, symbol: '$'}
 ```
 
 ### Contents of global.yaml (Chinese)
@@ -67,7 +70,7 @@ cancelButton: "取消"
 ### Contents of feature-1.yaml (Chinese)
 
 ```yaml
-"@@context": "feature1"
+$prefix: "feature1"
 title: "功能 1"
 subtitle: "這功能啟動於 {date}"
 ```
@@ -103,7 +106,7 @@ Contents of `en.arb`:
 ```json
 {
   "@@locale": "en",
-  "@@last_modified": "2024-04-07T09:38:31.921878Z",
+  "@@last_modified": "2024-04-08T01:13:10.592126Z",
   "okButton": "OK",
   "@okButton": {
     "description": "Finish the process"
@@ -140,6 +143,18 @@ Contents of `en.arb`:
         "example": "1995/01/23"
       }
     }
+  },
+  "feature1Price": "You have {money}",
+  "@feature1Price": {
+    "placeholders": {
+      "money": {
+        "type": "num",
+        "format": "compactCurrency",
+        "optionalParameters": {
+          "symbol": "$"
+        }
+      }
+    }
   }
 }
 ```
@@ -149,7 +164,7 @@ Contents of `zh.arb`:
 ```json
 {
   "@@locale": "zh",
-  "@@last_modified": "2024-04-07T09:38:31.933935Z",
+  "@@last_modified": "2024-04-08T01:13:10.604411Z",
   "okButton": "確定",
   "@okButton": {
     "description": "Finish the process"

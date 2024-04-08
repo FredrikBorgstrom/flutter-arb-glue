@@ -7,6 +7,7 @@ class JsonLoader extends Loader {
 
   @override
   Map<String, dynamic> loadContent(String content) {
-    return jsonDecode(content);
+    final result = jsonDecode(content);
+    return result is Map<String, dynamic> ? result : <String, dynamic>{};
   }
 }

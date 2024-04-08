@@ -44,8 +44,8 @@ bump: ## install-bumper ## Bump version
 	bumper --latestVersion=v$$version
 
 .PHONY: build-example
-build-example: ## Build example
-	dart run arb_glue --source example --destination example --base en
+build-example: ## Build example, config by pubspec.yaml
+	dart run arb_glue
 
 ##@ Tools
 .PHONY: install-bumper

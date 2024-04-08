@@ -127,9 +127,9 @@ Map<String, ArbPlaceholder> _parsePlaceholders(Map<String, dynamic> data) {
       description: _parseString(ph, 'description'),
       example: _parseString(ph, 'example'),
       format: _parseString(ph, 'format'),
-      decimalDigits: _parseInt(pm, 'decimalDigits'),
-      symbol: _parseString(pm, 'symbol'),
-      customPattern: _parseString(pm, 'customPattern'),
+      decimalDigits: _parseInt(pm, 'decimalDigits') ?? _parseInt(ph, 'decimalDigits'),
+      symbol: _parseString(pm, 'symbol') ?? _parseString(ph, 'symbol'),
+      customPattern: _parseString(pm, 'customPattern') ?? _parseString(ph, 'customPattern'),
     );
   }
 

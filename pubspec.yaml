@@ -20,3 +20,7 @@ dev_dependencies:
   test: ^1.25.2
   coverage: ^1.7.2
   flutter_lints: ^3.0.0
+arb_glue:
+  source: example
+  destination: example
+  base: en

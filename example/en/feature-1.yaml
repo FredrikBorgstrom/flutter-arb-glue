@@ -8,3 +8,6 @@ subtitle: "This feature is enabled at {date}"
       type: DateTime
       description: When is the feature enabled
       example: 1995/01/23
+price:
+- "You have {money}"
+- money: {type: num, format: compactCurrency, symbol: '$'}

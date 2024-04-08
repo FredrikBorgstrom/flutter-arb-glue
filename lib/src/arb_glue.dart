@@ -48,8 +48,8 @@ class ArbGlue {
           continue;
         }
 
-        Logger.root.info('${file.path}: start');
         loader.load(file.readAsStringSync(), arb);
+        Logger.root.info('${file.path}: ok');
       }
 
       if (arb.locale != base.locale) {

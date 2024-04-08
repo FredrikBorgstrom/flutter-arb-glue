@@ -241,10 +241,14 @@ enum ArbEntityType {
       case 'int':
       case 'integer':
         return integer;
+      case 'float':
       case 'double':
         return double;
+      case 'num':
       case 'number':
         return number;
+      case 'date':
+      case 'time':
       case 'datetime':
         return dateTime;
       default:

@@ -10,6 +10,7 @@ class YamlLoader extends Loader {
   @override
   Map<String, dynamic> loadContent(String content) {
     final value = loadYaml(content);
-    return jsonDecode(jsonEncode(value));
+    final result = jsonDecode(jsonEncode(value));
+    return result is Map<String, dynamic> ? result : <String, dynamic>{};
   }
 }

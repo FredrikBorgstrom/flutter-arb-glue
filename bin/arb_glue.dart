@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:arb_glue/arb_glue.dart';
-import 'package:yaml/yaml.dart';
+import 'package:arb_glue/src/loaders/yaml.dart';
 
 Future<void> main(List<String> args) async {
   if (args.contains('--help') || args.contains('-h')) {
@@ -17,14 +17,14 @@ Future<void> main(List<String> args) async {
     return;
   }
   final option = Options.fromArgs(args, _loadPubSpec());
-  final glue = ArbGlue(option);
 
-  glue.run();
+  ArbGlue(option).run();
 }
 
 Map<String, dynamic> _loadPubSpec() {
+  const loader = YamlLoader();
   final content = File('pubspec.yaml').readAsStringSync();
-  final val = loadYaml(content)['arb_glue'];
+  final val = loader.loadContent(content)['arb_glue'];
 
   if (val is Map<String, dynamic>) {
     return val;
