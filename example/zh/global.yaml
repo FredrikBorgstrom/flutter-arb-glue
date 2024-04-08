@@ -1,2 +1,6 @@
 okButton: "確定"
 cancelButton: "取消"
+transportation:
+- car: 汽車
+  bicycle: 腳踏車
+  scooter: 摩托車

@@ -33,7 +33,7 @@ class ArbGlue {
         locale: lang,
         author: options.author,
         context: options.context,
-        entities: <ArbEntity>[],
+        entities: <String, ArbEntity>{},
       );
       base ??= arb;
       for (final file in folder.listSync()) {
@@ -48,7 +48,7 @@ class ArbGlue {
           continue;
         }
 
-        loader.load(file.readAsStringSync(), arb);
+        loader.load(file.readAsStringSync(), arb, base);
         Logger.root.info('${file.path}: ok');
       }
 

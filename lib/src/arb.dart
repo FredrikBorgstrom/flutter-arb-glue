@@ -27,7 +27,7 @@ class Arb {
   final String? author;
 
   /// All the entities in the arb file.
-  final List<ArbEntity> entities;
+  final Map<String, ArbEntity> entities;
 
   const Arb({
     required this.locale,
@@ -49,7 +49,7 @@ class Arb {
       obj['@@context'] = context!;
     }
 
-    for (final entity in entities) {
+    for (final entity in entities.values) {
       obj.addAll(entity.toObject());
     }
 
@@ -57,12 +57,10 @@ class Arb {
   }
 
   void fallback(Arb base) {
-    for (final entity in entities) {
-      for (final baseE in base.entities) {
-        if (entity.key == baseE.key) {
-          entity.fallback(baseE);
-          break;
-        }
+    for (final entity in entities.values) {
+      final b = base.entities[entity.key];
+      if (b != null) {
+        entity.fallback(b);
       }
     }
   }

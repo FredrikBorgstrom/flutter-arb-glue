@@ -173,6 +173,14 @@ Contents of `zh.arb`:
   "@cancelButton": {
     "description": "Cancel the process"
   },
+  "transportation": "{tool, select, car{汽車} bicycle{腳踏車} scooter{摩托車} other{UNKNOWN}}",
+  "@transportation": {
+    "placeholders": {
+      "tool": {
+        "type": "String"
+      }
+    }
+  },
   "feature1Title": "功能 1",
   "feature1Subtitle": "這功能啟動於 {date}",
   "@feature1Subtitle": {

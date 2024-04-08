@@ -11,11 +11,11 @@ abstract class Loader {
   ///
   /// - [content] is the content of the file.
   /// - [arb] is used for multiple arb files and merge the result into one object.
-  void load(String content, Arb arb) {
+  void load(String content, Arb arb, Arb base) {
     final object = loadContent(content);
 
     final prefix = object.remove(r'$prefix');
-    _load(object, arb, prefix is String ? prefix : null);
+    _load(object, arb, base, prefix is String ? prefix : null);
   }
 
   /// Five ways to load the content.
@@ -24,7 +24,7 @@ abstract class Loader {
   /// 2. list with text and meta
   /// 3. text with meta
   /// 4. pure text
-  void _load(Map<String, dynamic> object, Arb arb, String? prefix) {
+  void _load(Map<String, dynamic> object, Arb arb, Arb base, String? prefix) {
     final ck =
         prefix == null ? (String key) => key : (String key) => '$prefix${key[0].toUpperCase()}${key.substring(1)}';
 
@@ -41,7 +41,7 @@ abstract class Loader {
       if (value is Map<String, dynamic>) {
         final prefix2 = value.remove(r'$prefix');
         final nested = prefix2 is String ? prefix2 : key;
-        _load(value, arb, ck(nested));
+        _load(value, arb, base, ck(nested));
         continue;
       }
 
@@ -54,39 +54,44 @@ abstract class Loader {
           if (value.length > 2 && value[2] is String) 'description': value[2],
           if (value.length > 2 && value[2] is Map<String, dynamic>) 'placeholders': value[2],
         };
-        text = _parseTextOrSpecial(value[0], meta);
+        text = _parseTextOrSpecial(value[0], meta, base.entities[key]);
       } else {
         // 3. text with meta
         text = value.toString();
         // 4. pure text
         if (meta is! Map<String, dynamic>) {
-          arb.entities.add(ArbEntity(key: ck(key), text: text));
+          final k = ck(key);
+          arb.entities[k] = ArbEntity(key: k, text: text);
           continue;
         }
       }
 
-      arb.entities.add(ArbEntity(
-        key: ck(key),
+      final k = ck(key);
+      arb.entities[k] = ArbEntity(
+        key: k,
         text: text,
         description: _parseString(meta, 'description'),
         placeholders: _parsePlaceholders(_parseMap(meta, 'placeholders')),
-      ));
+      );
     }
   }
 
   Map<String, dynamic> loadContent(String content);
 }
 
-String _parseTextOrSpecial(input, Map<String, dynamic> meta) {
+String _parseTextOrSpecial(input, Map<String, dynamic> meta, ArbEntity? base) {
   if (input is String) {
     return input;
   }
 
   if (input is Map<String, dynamic>) {
     final phs = _parseMap(meta, 'placeholders');
-    final key = phs.isEmpty ? '' : phs.keys.first;
+    final key = phs.isEmpty ? (base?.placeholders?.keys.firstOrNull ?? 'name') : phs.keys.first;
     final ph = _parseMap(phs, key);
     final mode = ph['mode'] ?? 'select';
+    if (input['other'] == null) {
+      input['other'] = 'UNKNOWN';
+    }
     final text = [for (final entry in input.entries) '${entry.key}{${entry.value}}'].join(' ');
     return '{$key, $mode, $text}';
   }

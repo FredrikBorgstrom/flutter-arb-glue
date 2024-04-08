@@ -33,7 +33,6 @@ withSelect:
 - car: Car
   bicycle: Bicycle
   scooter: Scooter
-  other: UNKNOWN
 - {tool: {}}
 withPlural:
 - =0: Empty

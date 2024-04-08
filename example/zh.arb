@@ -1,6 +1,6 @@
 {
   "@@locale": "zh",
-  "@@last_modified": "2024-04-08T01:13:10.604411Z",
+  "@@last_modified": "2024-04-08T10:03:02.636355Z",
   "okButton": "確定",
   "@okButton": {
     "description": "Finish the process"
@@ -8,6 +8,14 @@
   "cancelButton": "取消",
   "@cancelButton": {
     "description": "Cancel the process"
+  },
+  "transportation": "{tool, select, car{汽車} bicycle{腳踏車} scooter{摩托車} other{UNKNOWN}}",
+  "@transportation": {
+    "placeholders": {
+      "tool": {
+        "type": "String"
+      }
+    }
   },
   "feature1Title": "功能 1",
   "feature1Subtitle": "這功能啟動於 {date}",
