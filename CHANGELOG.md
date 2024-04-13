@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Please check git diff.
 
+## [v0.4.0] - 2024-04-13
+
+-   ([707ba5c](https://github.com/evan361425/flutter-arb-glue/commit/707ba5ce248f28f9d61e8daa303c141527b94137)) feat: allow null map in placeholders - wu0dj2k7ao3
+
 ## [v0.3.2] - 2024-04-08
 
 -   ([c13d35e](https://github.com/evan361425/flutter-arb-glue/commit/c13d35e9f847de19fc37d638802c1a86c7f0f2a9)) fix: fallback to base on select - wu0dj2k7ao3
@@ -42,7 +46,8 @@ Please check git diff.
 
 Initial Release
 
-[unreleased]: https://github.com/evan361425/flutter-arb-glue/compare/v0.3.2...HEAD
+[unreleased]: https://github.com/evan361425/flutter-arb-glue/compare/v0.4.0...HEAD
+[v0.4.0]: https://github.com/evan361425/flutter-arb-glue/compare/v0.3.2...v0.4.0
 [v0.3.2]: https://github.com/evan361425/flutter-arb-glue/compare/v0.3.1...v0.3.2
 [v0.3.1]: https://github.com/evan361425/flutter-arb-glue/compare/v0.3.0...v0.3.1
 [v0.3.0]: https://github.com/evan361425/flutter-arb-glue/compare/v0.2.1...v0.3.0
