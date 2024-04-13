@@ -15,19 +15,20 @@ class Options {
   /// Blacklisted folders inside the [source].
   final List<String> exclude;
 
-  /// The base locale of the arb file.
-  ///
-  /// If not provided, the base locale will be the first locale found in the
-  /// source folder.
-  ///
-  /// *base* locale can fallback placeholder to other locales.
+  /// The fallback values of the arb file.
   final String? base;
 
-  /// The author of the arb file.
+  /// The default value of other in select/plural mode.
+  final String defaultOtherValue;
+
+  /// The author of these messages.
   final String? author;
 
-  /// The context of the arb file.
+  /// It describes (in text) the context in which all these resources apply.
   final String? context;
+
+  /// Whether to add the last modified time of the file.
+  final bool lastModified;
 
   /// The file template for the output arb file.
   final String fileTemplate;
@@ -40,6 +41,8 @@ class Options {
     required this.destination,
     this.exclude = const [],
     this.base,
+    this.defaultOtherValue = 'UNKNOWN',
+    this.lastModified = true,
     this.author,
     this.context,
     this.fileTemplate = '{lang}.arb',
@@ -50,8 +53,10 @@ class Options {
     final src = o['source'] is String ? o['source'] : 'lib/l10n';
     final dst = o['destination'] is String ? o['destination'] : 'lib/l10n';
     final base = o['base'] is String ? o['base'] : null;
+    final defaultOtherValue = o['defaultOtherValue'] is String ? o['defaultOtherValue'] : 'UNKNOWN';
     final author = o['author'] is String ? o['author'] : null;
     final context = o['context'] is String ? o['context'] : null;
+    final lastModified = o['lastModified'] is bool ? o['lastModified'] : true;
     final fileTemplate = o['fileTemplate'] is String ? o['fileTemplate'] : '{lang}.arb';
     final verbose = o['verbose'] is bool ? o['verbose'] : false;
     final exc = o['exclude'];
@@ -62,6 +67,8 @@ class Options {
       ..addOption('destination', abbr: 'd', defaultsTo: dst)
       ..addMultiOption('exclude', abbr: 'e', defaultsTo: exclude)
       ..addOption('base', abbr: 'b', defaultsTo: base)
+      ..addOption('defaultOtherValue', defaultsTo: defaultOtherValue)
+      ..addFlag('lastModified', defaultsTo: lastModified)
       ..addOption('author', defaultsTo: author)
       ..addOption('context', defaultsTo: context)
       ..addOption('fileTemplate', defaultsTo: fileTemplate)
@@ -77,8 +84,10 @@ class Options {
       destination: parsed['destination'],
       exclude: parsed['exclude'],
       base: parsed['base'],
+      defaultOtherValue: parsed['defaultOtherValue'],
       author: parsed['author'],
       context: parsed['context'],
+      lastModified: parsed['lastModified'],
       fileTemplate: parsed['fileTemplate'],
       verbose: parsed['verbose'],
     );

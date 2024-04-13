@@ -35,8 +35,7 @@ transportation:
 - car: Car
   bicycle: Bicycle
   scooter: Scooter
-  other: UNKNOWN
-- {tool: {}}
+- tool:
 dialog:
   $prefix: dialog
   title: "Dialog"
@@ -106,7 +105,6 @@ Contents of `en.arb`:
 ```json
 {
   "@@locale": "en",
-  "@@last_modified": "2024-04-08T01:13:10.592126Z",
   "okButton": "OK",
   "@okButton": {
     "description": "Finish the process"
@@ -164,7 +162,6 @@ Contents of `zh.arb`:
 ```json
 {
   "@@locale": "zh",
-  "@@last_modified": "2024-04-08T01:13:10.604411Z",
   "okButton": "確定",
   "@okButton": {
     "description": "Finish the process"

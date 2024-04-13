@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'loader.dart';
 
 class JsonLoader extends Loader {
-  const JsonLoader();
+  const JsonLoader({required super.defaultOtherValue});
 
   @override
   Map<String, dynamic> loadContent(String content) {

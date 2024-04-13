@@ -36,10 +36,12 @@ class Arb {
     required this.entities,
   });
 
-  Map<String, Object> toObject() {
+  Map<String, Object> toObject({
+    required bool lastModified,
+  }) {
     final obj = <String, Object>{
       '@@locale': locale,
-      '@@last_modified': DateTime.now().toUtc().toIso8601String(),
+      if (lastModified) '@@last_modified': DateTime.now().toUtc().toIso8601String(),
     };
 
     if (author != null) {

@@ -22,9 +22,9 @@ test: ## Run tests
 	dart test
 
 .PHONY: test-coverage
-test-coverage: ## Run tests with coverage
+test-coverage: install-lcov ## Run tests with coverage
 	dart run coverage:test_with_coverage
-	if which genhtml > /dev/null; then genhtml coverage/lcov.info -o coverage/html; fi
+	@genhtml coverage/lcov.info -o coverage/html
 
 ##@ Build
 .PHONY: bump
@@ -45,11 +45,18 @@ bump: ## install-bumper ## Bump version
 
 .PHONY: build-example
 build-example: ## Build example, config by pubspec.yaml
-	dart run arb_glue
+	dart run arb_glue --no-lastModified
 
 ##@ Tools
 .PHONY: install-bumper
 install-bumper: ## Install bumper
-	if ! command -v bumper &> /dev/null; then \
+	@if ! command -v bumper &> /dev/null; then \
 		npm i --global @evan361425/version-bumper; \
+	fi
+
+.PHONY: install-lcov
+install-lcov: ## Install lcov
+	@if ! command -v lcov &> /dev/null; then \
+		echo "Missing lcov, you can use: brew install lcov in macOS"; \
+		exit 1; \
 	fi

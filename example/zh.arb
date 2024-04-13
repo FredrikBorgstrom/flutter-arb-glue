@@ -1,6 +1,5 @@
 {
   "@@locale": "zh",
-  "@@last_modified": "2024-04-08T10:03:02.636355Z",
   "okButton": "確定",
   "@okButton": {
     "description": "Finish the process"

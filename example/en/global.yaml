@@ -13,7 +13,6 @@ transportation:
 - car: Car
   bicycle: Bicycle
   scooter: Scooter
-  other: UNKNOWN
-- {tool: {}}
+- tool:
 dialog:
   title: "Dialog"

@@ -4,8 +4,10 @@ import '../arb.dart';
 ///
 /// It should be called to load the file.
 abstract class Loader {
+  final String defaultOtherValue;
+
   /// Constant.
-  const Loader();
+  const Loader({required this.defaultOtherValue});
 
   /// Load the content of the file.
   ///
@@ -54,7 +56,12 @@ abstract class Loader {
           if (value.length > 2 && value[2] is String) 'description': value[2],
           if (value.length > 2 && value[2] is Map<String, dynamic>) 'placeholders': value[2],
         };
-        text = _parseTextOrSpecial(value[0], meta, base.entities[key]);
+        text = _parseTextOrSpecial(
+          value[0],
+          meta,
+          base: base.entities[key],
+          defaultOtherValue: defaultOtherValue,
+        );
       } else {
         // 3. text with meta
         text = value.toString();
@@ -79,7 +86,12 @@ abstract class Loader {
   Map<String, dynamic> loadContent(String content);
 }
 
-String _parseTextOrSpecial(input, Map<String, dynamic> meta, ArbEntity? base) {
+String _parseTextOrSpecial(
+  input,
+  Map<String, dynamic> meta, {
+  ArbEntity? base,
+  required String defaultOtherValue,
+}) {
   if (input is String) {
     return input;
   }
@@ -90,7 +102,7 @@ String _parseTextOrSpecial(input, Map<String, dynamic> meta, ArbEntity? base) {
     final ph = _parseMap(phs, key);
     final mode = ph['mode'] ?? 'select';
     if (input['other'] == null) {
-      input['other'] = 'UNKNOWN';
+      input['other'] = defaultOtherValue;
     }
     final text = [for (final entry in input.entries) '${entry.key}{${entry.value}}'].join(' ');
     return '{$key, $mode, $text}';
@@ -123,8 +135,10 @@ Map<String, dynamic> _parseMap(Map<String, dynamic> object, String key) {
 Map<String, ArbPlaceholder> _parsePlaceholders(Map<String, dynamic> data) {
   final phs = <String, ArbPlaceholder>{};
   for (final phEntry in data.entries) {
-    final ph = phEntry.value;
-    if (ph is! Map<String, dynamic>) continue;
+    var ph = phEntry.value;
+    if (ph is! Map<String, dynamic>) {
+      ph = <String, dynamic>{};
+    }
 
     final pm = _parseMap(ph, 'optionalParameters');
     phs[phEntry.key] = ArbPlaceholder(

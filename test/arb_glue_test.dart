@@ -33,7 +33,7 @@ withSelect:
 - car: Car
   bicycle: Bicycle
   scooter: Scooter
-- {tool: {}}
+- tool:
 withPlural:
 - =0: Empty
   =1: One Item
@@ -44,7 +44,7 @@ byNested:
   button: Nested Button
 invalidSelect:
 - [car, Car]
-- {tool: {}}
+- tool:
 ''');
     File(join(enPath, 'feature.yml')).writeAsStringSync('''\$prefix: feature
 withPlaceholders:

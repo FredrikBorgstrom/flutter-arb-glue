@@ -10,13 +10,6 @@ import 'loaders/loader.dart';
 import 'loaders/yaml.dart';
 import 'options.dart';
 
-const _loaders = <String, Loader>{
-  '.arb': JsonLoader(),
-  '.json': JsonLoader(),
-  '.yaml': YamlLoader(),
-  '.yml': YamlLoader(),
-};
-
 class ArbGlue {
   final Options options;
 
@@ -24,6 +17,16 @@ class ArbGlue {
 
   void run() {
     options.verify();
+
+    final jsonLoader = JsonLoader(defaultOtherValue: options.defaultOtherValue);
+    final yamlLoader = YamlLoader(defaultOtherValue: options.defaultOtherValue);
+    final loaders = <String, Loader>{
+      '.arb': jsonLoader,
+      '.json': jsonLoader,
+      '.yaml': yamlLoader,
+      '.yml': yamlLoader,
+    };
+
     Arb? base;
     for (final folder in options.folders()) {
       final lang = basename(folder.path);
@@ -42,7 +45,7 @@ class ArbGlue {
           continue;
         }
 
-        final loader = _loaders[extension(file.path)];
+        final loader = loaders[extension(file.path)];
         if (loader == null) {
           Logger.root.warning('${file.path}: extension is not supported.');
           continue;
@@ -57,7 +60,12 @@ class ArbGlue {
       }
 
       const encoder = JsonEncoder.withIndent('  ');
-      options.write(lang, encoder.convert(arb.toObject()));
+      options.write(
+        lang,
+        encoder.convert(arb.toObject(
+          lastModified: options.lastModified,
+        )),
+      );
     }
   }
 }

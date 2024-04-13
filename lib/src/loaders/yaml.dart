@@ -5,7 +5,7 @@ import 'package:yaml/yaml.dart';
 import 'loader.dart';
 
 class YamlLoader extends Loader {
-  const YamlLoader();
+  const YamlLoader({super.defaultOtherValue = ''});
 
   @override
   Map<String, dynamic> loadContent(String content) {

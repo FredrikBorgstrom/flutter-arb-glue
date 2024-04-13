@@ -208,29 +208,62 @@ Full configuration options:
 ```yaml
 arb_glue:
   # The source folder contains the files.
+  #
   # Type: String
   source: lib/l10n
+
   # The destination folder where the files will be generated.
+  #
   # Type: String
   destination: lib/l10n
+
   # Blacklisted folders inside the [source].
+  #
   # Type: List<String>
   exclude:
-  # The author of the arb file.
+
+  # The author of these messages.
+  #
+  # In the case of localized ARB files it can contain the names/details of the translator.
+  # see: https://github.com/google/app-resource-bundle/wiki/ApplicationResourceBundleSpecification#global-attributes
   # Type: String
   author:
-  # The context of the arb file.
+
+  # It describes (in text) the context in which all these resources apply.
+  #
+  # see: https://github.com/google/app-resource-bundle/wiki/ApplicationResourceBundleSpecification#global-attributes
   # Type: String
   context:
-  # The base locale of the arb file.
+
+  # Whether to add the last modified time of the file.
+  #
+  # Type: bool
+  lastModified: true
+
+  # The fallback values of the arb file.
+  #
   # If not provided, the base locale will be the first locale found in the
   # source folder.
-  # `base` locale can fallback placeholder to other locales.
+  #
+  # Based locale provide fallback placeholders to other locales.
+  #
   # Type: String
   base:
+
+  # The default value of other in select/plural mode.
+  #
+  # See example to get more detailed.
+  #
+  # Type: String
+  defaultOtherValue: UNKNOWN
+
   # The file template for the output arb file.
+  #
+  # Type: String
   fileTemplate: '{lang}.arb'
+
   # Whether to print verbose output.
+  #
   # Type: bool
   verbose: false
 ```
