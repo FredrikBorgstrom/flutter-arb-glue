@@ -24,7 +24,7 @@ test: ## Run tests
 .PHONY: test-coverage
 test-coverage: install-lcov ## Run tests with coverage
 	dart run coverage:test_with_coverage
-	@genhtml coverage/lcov.info -o coverage/html
+	@if which genhtml > /dev/null; then genhtml coverage/lcov.info -o coverage/html; fi
 
 ##@ Build
 .PHONY: bump
@@ -56,7 +56,6 @@ install-bumper: ## Install bumper
 
 .PHONY: install-lcov
 install-lcov: ## Install lcov
-	@if ! command -v lcov &> /dev/null; then \
+	@if ! which lcov &> /dev/null; then \
 		echo "Missing lcov, you can use: brew install lcov in macOS"; \
-		exit 1; \
 	fi
