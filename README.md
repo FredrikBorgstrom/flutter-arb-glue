@@ -16,6 +16,21 @@ Features:
 -   [Map structure on `select` and `plural`](#select-and-plural);
 -   Placeholders are only needed in the base language.
 
+> This package operates independently from the project [POS System](https://github.com/evan361425/flutter-pos-system/).
+>
+> Explore that repository to witness firsthand how this package is utilized within the online product.
+
+Table of Contents:
+
+-   [Installation](#installation)
+-   [Usage](#usage)
+-   [Supported formats](#supported-formats)
+    -   [Schema](#schema)
+    -   [Prefix](#prefix)
+    -   [Nested Structure](#nested-structure)
+    -   [Select and plural](#select-and-plural)
+-   [Configuration](#configuration)
+
 ## Installation
 
 Using [pub.dev](https://pub.dev/packages/arb_glue) to manage the package:s
@@ -111,9 +126,10 @@ myButton:
 
 ### Schema
 
-Flutter's l10n has several custom schema, see details in [arb.schema.json](./arb.schema.json).
+Flutter's localization (l10n) has several custom schemas,
+which are elaborated upon in [arb.schema.json](./arb.schema.json).
 
-If you are using VSCode, you can setup the schema by:
+If you're utilizing VSCode, streamline the schema setup by incorporating the following configuration:
 
 ```json
 {
