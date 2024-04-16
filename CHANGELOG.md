@@ -11,7 +11,7 @@ Please check git diff.
 
 ## [v0.5.0] - 2024-04-16
 
-
+-   chore: publish annotation and schema
 
 ## [v0.4.1] - 2024-04-16
 
