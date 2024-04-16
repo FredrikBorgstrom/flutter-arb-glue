@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Please check git diff.
 
+## [v0.4.1] - 2024-04-16
+
+-   ([8a2ca0e](https://github.com/evan361425/flutter-arb-glue/commit/8a2ca0e5752987cbd33338d86864c834feb84021)) feat: add isCustomDateFormat - wu0dj2k7ao3
+
 ## [v0.4.0] - 2024-04-13
 
 -   ([707ba5c](https://github.com/evan361425/flutter-arb-glue/commit/707ba5ce248f28f9d61e8daa303c141527b94137)) feat: allow null map in placeholders - wu0dj2k7ao3
@@ -46,7 +50,8 @@ Please check git diff.
 
 Initial Release
 
-[unreleased]: https://github.com/evan361425/flutter-arb-glue/compare/v0.4.0...HEAD
+[unreleased]: https://github.com/evan361425/flutter-arb-glue/compare/v0.4.1...HEAD
+[v0.4.1]: https://github.com/evan361425/flutter-arb-glue/compare/v0.4.0...v0.4.1
 [v0.4.0]: https://github.com/evan361425/flutter-arb-glue/compare/v0.3.2...v0.4.0
 [v0.3.2]: https://github.com/evan361425/flutter-arb-glue/compare/v0.3.1...v0.3.2
 [v0.3.1]: https://github.com/evan361425/flutter-arb-glue/compare/v0.3.0...v0.3.1
