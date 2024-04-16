@@ -173,6 +173,11 @@ class ArbPlaceholder {
   /// see https://pub.dev/documentation/intl/latest/intl/NumberFormat/NumberFormat.currency.html
   String? customPattern;
 
+  /// Custom configuration for the L10n.
+  ///
+  /// see: https://github.com/flutter/flutter/blob/3.19.5/packages/flutter_tools/lib/src/localizations/gen_l10n_types.dart#L232-L236
+  bool? isCustomDateFormat;
+
   ArbPlaceholder({
     required this.type,
     this.description,
@@ -181,6 +186,7 @@ class ArbPlaceholder {
     this.decimalDigits,
     this.symbol,
     this.customPattern,
+    this.isCustomDateFormat,
   });
 
   Map<String, Object> toObject() {
@@ -193,6 +199,11 @@ class ArbPlaceholder {
     }
     if (format != null) {
       obj['format'] = format!;
+    }
+    if (isCustomDateFormat != null) {
+      // required to be string
+      // see: https://github.com/flutter/flutter/blob/3.19.5/packages/flutter_tools/lib/src/localizations/gen_l10n_types.dart#L276
+      obj['isCustomDateFormat'] = isCustomDateFormat.toString();
     }
 
     final optionalParameters = <String, Object>{};
@@ -220,6 +231,7 @@ class ArbPlaceholder {
     decimalDigits ??= base.decimalDigits;
     symbol ??= base.symbol;
     customPattern ??= base.customPattern;
+    isCustomDateFormat ??= base.isCustomDateFormat;
   }
 }
 

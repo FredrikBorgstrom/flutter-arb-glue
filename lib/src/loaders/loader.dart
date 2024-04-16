@@ -125,6 +125,14 @@ int? _parseInt(Map<String, dynamic> object, String key) {
   return null;
 }
 
+bool? _parseBool(Map<String, dynamic> object, String key) {
+  final v = object[key];
+  if (v is String) return v == 'true';
+  if (v is bool) return v;
+
+  return null;
+}
+
 Map<String, dynamic> _parseMap(Map<String, dynamic> object, String key) {
   final v = object[key];
   if (v is Map<String, dynamic>) return v;
@@ -146,6 +154,7 @@ Map<String, ArbPlaceholder> _parsePlaceholders(Map<String, dynamic> data) {
       description: _parseString(ph, 'description'),
       example: _parseString(ph, 'example'),
       format: _parseString(ph, 'format'),
+      isCustomDateFormat: _parseBool(ph, 'isCustomDateFormat'),
       decimalDigits: _parseInt(pm, 'decimalDigits') ?? _parseInt(ph, 'decimalDigits'),
       symbol: _parseString(pm, 'symbol') ?? _parseString(ph, 'symbol'),
       customPattern: _parseString(pm, 'customPattern') ?? _parseString(ph, 'customPattern'),

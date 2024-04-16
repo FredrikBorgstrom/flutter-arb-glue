@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:arb_glue/arb_glue.dart';
+import 'package:logging/logging.dart';
 import 'package:path/path.dart';
 import 'package:test/test.dart';
 
@@ -54,11 +55,13 @@ withPlaceholders:
     type: String
     description: Placeholder 1
     example: Example 1
+    isCustomDateFormat: 'true'
   placeholder2:
     type: Number
     description: Placeholder 2
     example: 100
     format: compactCurrency
+    isCustomDateFormat: true
     optionalParameters:
       symbol: '@'
       customPattern: '0,0.00'
@@ -99,7 +102,7 @@ byList2:
   "plain": "test"
 }''');
 
-    ArbGlue(Options.fromArgs([
+    final options = Options.fromArgs([
       '--source',
       temp.path,
       '--destination',
@@ -113,7 +116,9 @@ byList2:
       '--exclude',
       'fr',
       '--verbose',
-    ], {})).run();
+    ], {});
+    Logger.root.level = Level.OFF;
+    ArbGlue(options).run();
 
     final en = jsonDecode(File(join(temp.path, 'en.arb')).readAsStringSync());
     (en as Map).remove('@@last_modified');
@@ -147,9 +152,15 @@ byList2:
       "@featureWithPlaceholders": {
         "description": "YAML custom with placeholders with description",
         "placeholders": {
-          "placeholder1": {"type": "String", "description": "Placeholder 1", "example": "Example 1"},
+          "placeholder1": {
+            "type": "String",
+            "description": "Placeholder 1",
+            "example": "Example 1",
+            "isCustomDateFormat": "true",
+          },
           "placeholder2": {
             "type": "num",
+            "isCustomDateFormat": "true",
             "description": "Placeholder 2",
             "format": "compactCurrency",
             "optionalParameters": {"decimalDigits": 2, "symbol": "@", "customPattern": "0,0.00"}
@@ -195,11 +206,17 @@ byList2:
       "@featureWithPlaceholders": {
         "description": "特殊說明",
         "placeholders": {
-          "placeholder1": {"type": "String", "description": "特殊說明", "example": "Example 1"},
+          "placeholder1": {
+            "type": "String",
+            "description": "特殊說明",
+            "example": "Example 1",
+            "isCustomDateFormat": "true",
+          },
           "placeholder2": {
             "type": "num",
             "description": "Placeholder 2",
             "format": "compactCurrency",
+            "isCustomDateFormat": "true",
             "optionalParameters": {"decimalDigits": 2, "symbol": "@", "customPattern": "0,0.00"}
           }
         }

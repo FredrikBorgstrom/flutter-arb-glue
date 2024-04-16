@@ -109,6 +109,20 @@ myButton:
 - type: {type: String}
 ```
 
+### Schema
+
+Flutter's l10n has several custom schema, see details in [arb.schema.json](./arb.schema.json).
+
+If you are using VSCode, you can setup the schema by:
+
+```json
+{
+  "yaml.schemas": {
+    ".vscode/arb.schema.json": ["/lib/l10n/**/*.yaml"]
+  }
+}
+```
+
 ### Prefix
 
 Each file can have its own prefix by setting `$prefix`:

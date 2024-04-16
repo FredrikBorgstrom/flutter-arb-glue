@@ -95,7 +95,7 @@ class Options {
     Logger.root.level = options.verbose ? Level.ALL : Level.WARNING;
     // ignore: avoid_print
     Logger.root.onRecord.listen((record) => print(record.message));
-    Logger.root.info(parsed.toString());
+    Logger.root.info(parsed.options.map((key) => '$key: ${parsed[key]}').join('\n'));
 
     return options;
   }
