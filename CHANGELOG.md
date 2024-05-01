@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Please check git diff.
 
+## [v0.5.1] - 2024-05-01
+
+-   ([37da03e](https://github.com/evan361425/flutter-arb-glue/commit/37da03e66a9b402b97e53b2acb6cea448079d778)) fix: correctly fallback mode - wu0dj2k7ao3
+
 ## [v0.5.0] - 2024-04-16
 
 -   chore: publish annotation and schema
@@ -54,7 +58,8 @@ Please check git diff.
 
 Initial Release
 
-[unreleased]: https://github.com/evan361425/flutter-arb-glue/compare/v0.5.0...HEAD
+[unreleased]: https://github.com/evan361425/flutter-arb-glue/compare/v0.5.1...HEAD
+[v0.5.1]: https://github.com/evan361425/flutter-arb-glue/compare/v0.5.0...v0.5.1
 [v0.5.0]: https://github.com/evan361425/flutter-arb-glue/compare/v0.4.1...v0.5.0
 [v0.4.1]: https://github.com/evan361425/flutter-arb-glue/compare/v0.4.0...v0.4.1
 [v0.4.0]: https://github.com/evan361425/flutter-arb-glue/compare/v0.3.2...v0.4.0
