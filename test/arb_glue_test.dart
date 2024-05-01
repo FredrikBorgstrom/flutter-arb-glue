@@ -86,7 +86,11 @@ byList2:
 - description
 ''');
     File(join(zhPath, 'basic.arb')).writeAsStringSync('''{
-  "plain": "Plain text"
+  "plain": "Plain text",
+  "withPlural": [{
+    "=0": "沒有項目",
+    "=1": "一個項目"
+  }]
 }
 ''');
     File(join(zhPath, 'feature.arb')).writeAsStringSync('''{"\$prefix": "feature",
@@ -202,6 +206,12 @@ byList2:
       "@@author": "evan.lu",
       "@@context": "arb_glue",
       "plain": "Plain text",
+      'withPlural': '{count, plural, =0{沒有項目} =1{一個項目} other{UNKNOWN}}',
+      '@withPlural': {
+        'placeholders': {
+          'count': {'type': 'int'}
+        }
+      },
       "featureWithPlaceholders": "YAML 客製化 {placeholder1} {placeholder2}",
       "@featureWithPlaceholders": {
         "description": "特殊說明",

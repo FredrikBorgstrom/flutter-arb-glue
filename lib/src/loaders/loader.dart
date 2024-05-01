@@ -97,8 +97,11 @@ String _parseTextOrSpecial(
   }
 
   if (input is Map<String, dynamic>) {
-    final phs = _parseMap(meta, 'placeholders');
-    final key = phs.isEmpty ? (base?.placeholders?.keys.firstOrNull ?? 'name') : phs.keys.first;
+    final phs = _parseMap(meta, 'placeholders', {
+      for (final entry in base?.placeholders?.entries ?? <MapEntry<String, ArbPlaceholder>>[])
+        entry.key: {'mode': entry.value.mode}
+    });
+    final key = phs.isEmpty ? 'name' : phs.keys.first;
     final ph = _parseMap(phs, key);
     final mode = ph['mode'] ?? 'select';
     if (input['other'] == null) {
@@ -133,11 +136,11 @@ bool? _parseBool(Map<String, dynamic> object, String key) {
   return null;
 }
 
-Map<String, dynamic> _parseMap(Map<String, dynamic> object, String key) {
+Map<String, dynamic> _parseMap(Map<String, dynamic> object, String key, [Map<String, dynamic>? base]) {
   final v = object[key];
   if (v is Map<String, dynamic>) return v;
 
-  return <String, dynamic>{};
+  return base ?? <String, dynamic>{};
 }
 
 Map<String, ArbPlaceholder> _parsePlaceholders(Map<String, dynamic> data) {
@@ -158,6 +161,8 @@ Map<String, ArbPlaceholder> _parsePlaceholders(Map<String, dynamic> data) {
       decimalDigits: _parseInt(pm, 'decimalDigits') ?? _parseInt(ph, 'decimalDigits'),
       symbol: _parseString(pm, 'symbol') ?? _parseString(ph, 'symbol'),
       customPattern: _parseString(pm, 'customPattern') ?? _parseString(ph, 'customPattern'),
+      // internal
+      mode: _parseString(ph, 'mode'),
     );
   }
 

@@ -178,6 +178,11 @@ class ArbPlaceholder {
   /// see: https://github.com/flutter/flutter/blob/3.19.5/packages/flutter_tools/lib/src/localizations/gen_l10n_types.dart#L232-L236
   bool? isCustomDateFormat;
 
+  /// Internal use for the mode of the placeholder.
+  ///
+  /// Plural or select.
+  String? mode;
+
   ArbPlaceholder({
     required this.type,
     this.description,
@@ -187,6 +192,7 @@ class ArbPlaceholder {
     this.symbol,
     this.customPattern,
     this.isCustomDateFormat,
+    this.mode,
   });
 
   Map<String, Object> toObject() {
