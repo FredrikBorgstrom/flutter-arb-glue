@@ -23,22 +23,7 @@ Suppose we have the following directory structure containing language files:
 okButton:
   text: "OK"
   description: "Finish the process"
-cancelButton:
-- Cancel
-- Cancel the process
-counter:
-- =0: No items
-  =1: One item
-  other: '{count} items'
-- {count: {type: int, mode: plural}}
-transportation:
-- car: Car
-  bicycle: Bicycle
-  scooter: Scooter
-- tool:
-dialog:
-  $prefix: dialog
-  title: "Dialog"
+...
 ```
 
 ### Contents of feature-1.yaml (English)
@@ -46,24 +31,14 @@ dialog:
 ```yaml
 $prefix: feature1
 title: "Feature 1"
-subtitle: "This feature is enabled at {date}"
-"@subtitle":
-  description: Placing below title
-  placeholders:
-    date:
-      type: DateTime
-      description: When is the feature enabled
-      example: 1995/01/23
-price:
-- "You have {money}"
-- money: {type: num, format: compactCurrency, symbol: '$'}
+...
 ```
 
 ### Contents of global.yaml (Chinese)
 
 ```yaml
 okButton: "確定"
-cancelButton: "取消"
+...
 ```
 
 ### Contents of feature-1.yaml (Chinese)
@@ -71,7 +46,7 @@ cancelButton: "取消"
 ```yaml
 $prefix: "feature1"
 title: "功能 1"
-subtitle: "這功能啟動於 {date}"
+...
 ```
 
 ## Using ARB Glue
@@ -109,51 +84,8 @@ Contents of `en.arb`:
   "@okButton": {
     "description": "Finish the process"
   },
-  "cancelButton": "Cancel",
-  "@cancelButton": {
-    "description": "Cancel the process"
-  },
-  "counter": "{count, plural, =0{No items} =1{One item} other{{count} items}}",
-  "@counter": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "transportation": "{tool, select, car{Car} bicycle{Bicycle} scooter{Scooter} other{UNKNOWN}}",
-  "@transportation": {
-    "placeholders": {
-      "tool": {
-        "type": "String"
-      }
-    }
-  },
-  "dialogTitle": "Dialog",
   "feature1Title": "Feature 1",
-  "feature1Subtitle": "This feature is enabled at {date}",
-  "@feature1Subtitle": {
-    "description": "Placing below title",
-    "placeholders": {
-      "date": {
-        "type": "DateTime",
-        "description": "When is the feature enabled",
-        "example": "1995/01/23"
-      }
-    }
-  },
-  "feature1Price": "You have {money}",
-  "@feature1Price": {
-    "placeholders": {
-      "money": {
-        "type": "num",
-        "format": "compactCurrency",
-        "optionalParameters": {
-          "symbol": "$"
-        }
-      }
-    }
-  }
+  "...": "..."
 }
 ```
 
@@ -166,30 +98,8 @@ Contents of `zh.arb`:
   "@okButton": {
     "description": "Finish the process"
   },
-  "cancelButton": "取消",
-  "@cancelButton": {
-    "description": "Cancel the process"
-  },
-  "transportation": "{tool, select, car{汽車} bicycle{腳踏車} scooter{摩托車} other{UNKNOWN}}",
-  "@transportation": {
-    "placeholders": {
-      "tool": {
-        "type": "String"
-      }
-    }
-  },
   "feature1Title": "功能 1",
-  "feature1Subtitle": "這功能啟動於 {date}",
-  "@feature1Subtitle": {
-    "description": "Placing below title",
-    "placeholders": {
-      "date": {
-        "type": "DateTime",
-        "description": "When is the feature enabled",
-        "example": "1995/01/23"
-      }
-    }
-  }
+  "...": "..."
 }
 ```
 
