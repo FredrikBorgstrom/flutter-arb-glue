@@ -40,7 +40,9 @@ bump: ## install-bumper ## Bump version
 		exit 1; \
 	fi; \
 	sed -i.bk '5s/version: *.*.*/version: '$$version'/' pubspec.yaml; \
-	rm pubspec.yaml.bk; \
+	rm -f pubspec.yaml.bk; \
+	sed -i.bk "6s/const version = '.*';/const version = '$$version';/" bin/arb_glue.dart; \
+	rm -f bin/arb_glue.dart.bk; \
 	bumper --latestVersion=v$$version
 
 .PHONY: build-example

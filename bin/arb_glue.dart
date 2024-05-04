@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:arb_glue/arb_glue.dart';
 import 'package:arb_glue/src/loaders/yaml.dart';
 
+const version = '3.7.1';
+
 Future<void> main(List<String> args) async {
   if (args.contains('--help') || args.contains('-h')) {
     // ignore: avoid_print
@@ -14,6 +16,12 @@ Future<void> main(List<String> args) async {
       'Options:',
       Options.getArgParser(args, _loadPubSpec()).usage,
     ].join('\n'));
+    return;
+  }
+
+  if (args.contains('--version')) {
+    // ignore: avoid_print
+    print('arb_glue: $version');
     return;
   }
   final option = Options.fromArgs(args, _loadPubSpec());
