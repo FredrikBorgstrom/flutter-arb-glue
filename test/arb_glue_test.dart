@@ -35,11 +35,12 @@ withSelect:
   bicycle: Bicycle
   scooter: Scooter
 - tool:
-withPlural:
-- =0: Empty
-  =1: One Item
-  other: '{count} Items'
-- {count: {type: int, mode: plural}}
+the:
+  withPlural:
+  - =0: Empty
+    =1: One Item
+    other: '{count} Items'
+  - count: {type: int, mode: plural}
 byNested:
   \$prefix: customPrefix
   button: Nested Button
@@ -87,10 +88,12 @@ byList2:
 ''');
     File(join(zhPath, 'basic.arb')).writeAsStringSync('''{
   "plain": "Plain text",
-  "withPlural": [{
-    "=0": "沒有項目",
-    "=1": "一個項目"
-  }]
+  "the": {
+    "withPlural": [{
+      "=0": "沒有項目",
+      "=1": "一個項目"
+    }]
+  }
 }
 ''');
     File(join(zhPath, 'feature.arb')).writeAsStringSync('''{"\$prefix": "feature",
@@ -139,8 +142,8 @@ byList2:
           "tool": {"type": "String"}
         }
       },
-      "withPlural": "{count, plural, =0{Empty} =1{One Item} other{{count} Items}}",
-      "@withPlural": {
+      "theWithPlural": "{count, plural, =0{Empty} =1{One Item} other{{count} Items}}",
+      "@theWithPlural": {
         "placeholders": {
           "count": {"type": "int"}
         }
@@ -206,8 +209,8 @@ byList2:
       "@@author": "evan.lu",
       "@@context": "arb_glue",
       "plain": "Plain text",
-      'withPlural': '{count, plural, =0{沒有項目} =1{一個項目} other{UNKNOWN}}',
-      '@withPlural': {
+      'theWithPlural': '{count, plural, =0{沒有項目} =1{一個項目} other{UNKNOWN}}',
+      '@theWithPlural': {
         'placeholders': {
           'count': {'type': 'int'}
         }

@@ -4,11 +4,12 @@ okButton: "OK"
 cancelButton:
 - Cancel
 - Cancel the process
-counter:
-- =0: No items
-  =1: One item
-  other: '{count} items'
-- {count: {type: int, mode: plural}}
+the:
+  counter:
+  - =0: No items
+    =1: One item
+    other: '{count} items'
+  - count: {type: int, mode: plural}
 transportation:
 - car: Car
   bicycle: Bicycle

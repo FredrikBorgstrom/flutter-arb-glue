@@ -8,8 +8,8 @@
   "@cancelButton": {
     "description": "Cancel the process"
   },
-  "counter": "{count, plural, =0{No items} =1{One item} other{{count} items}}",
-  "@counter": {
+  "theCounter": "{count, plural, =0{No items} =1{One item} other{{count} items}}",
+  "@theCounter": {
     "placeholders": {
       "count": {
         "type": "int"

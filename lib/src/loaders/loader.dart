@@ -59,7 +59,7 @@ abstract class Loader {
         text = _parseTextOrSpecial(
           value[0],
           meta,
-          base: base.entities[key],
+          base: base.entities[ck(key)],
           defaultOtherValue: defaultOtherValue,
         );
       } else {

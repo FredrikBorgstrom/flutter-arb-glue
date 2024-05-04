@@ -4,6 +4,7 @@ transportation:
 - car: 汽車
   bicycle: 腳踏車
   scooter: 摩托車
-counter:
-- =0: 沒有項目
-  =1: 一個項目
+the:
+  counter:
+  - =0: 沒有項目
+    =1: 一個項目
