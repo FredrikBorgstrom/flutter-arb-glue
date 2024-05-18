@@ -24,3 +24,5 @@ arb_glue:
   source: example
   destination: example
   base: en
+  verbose: true
+  lastModified: false

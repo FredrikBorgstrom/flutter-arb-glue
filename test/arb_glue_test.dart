@@ -35,6 +35,10 @@ withSelect:
   bicycle: Bicycle
   scooter: Scooter
 - tool:
+wrong:
+- 0: No Items
+  1: One Item
+- count: {type: int, mode: plural}
 the:
   withPlural:
   - =0: Empty

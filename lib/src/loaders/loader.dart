@@ -56,6 +56,10 @@ abstract class Loader {
           if (value.length > 2 && value[2] is String) 'description': value[2],
           if (value.length > 2 && value[2] is Map<String, dynamic>) 'placeholders': value[2],
         };
+
+        // ignore non-encodable values
+        if (value[0] == null) continue;
+
         text = _parseTextOrSpecial(
           value[0],
           meta,
