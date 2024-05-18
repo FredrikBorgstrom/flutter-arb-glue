@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:arb_glue/arb_glue.dart';
 import 'package:arb_glue/src/loaders/yaml.dart';
 
-const version = '0.6.0';
+const version = '1.0.0';
 
 Future<void> main(List<String> args) async {
   if (args.contains('--help') || args.contains('-h')) {

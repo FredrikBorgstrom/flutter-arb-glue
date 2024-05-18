@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Please check git diff.
 
+## [v1.0.0] - 2024-05-18
+
+- ([4368621](https://github.com/evan361425/flutter-arb-glue/commit/4368621946bf42bdda53d84b7f0ad594072fbebd)) feat: show error message when load yaml failed - wu0dj2k7ao3
+
 ## [v0.6.0] - 2024-05-04
 
 - ([a00aad5](https://github.com/evan361425/flutter-arb-glue/commit/a00aad526e534602819afd209d3e0f951cd012e8)) fix: correct fallback - wu0dj2k7ao3
@@ -63,7 +67,8 @@ Please check git diff.
 
 Initial Release
 
-[unreleased]: https://github.com/evan361425/flutter-arb-glue/compare/v0.6.0...HEAD
+[unreleased]: https://github.com/evan361425/flutter-arb-glue/compare/v1.0.0...HEAD
+[v1.0.0]: https://github.com/evan361425/flutter-arb-glue/compare/v0.6.0...v1.0.0
 [v0.6.0]: https://github.com/evan361425/flutter-arb-glue/compare/v0.5.1...v0.6.0
 [v0.5.1]: https://github.com/evan361425/flutter-arb-glue/compare/v0.5.0...v0.5.1
 [v0.5.0]: https://github.com/evan361425/flutter-arb-glue/compare/v0.4.1...v0.5.0
